@@ -1417,21 +1417,20 @@
         }
 
         .showcase-frame {
-          overflow: visible;
-        }
-
-        .showcase-track {
-          gap: 1rem;
-          padding: 0 1rem 1rem;
           overflow-x: auto;
           scroll-snap-type: x mandatory;
           -webkit-overflow-scrolling: touch;
         }
 
+        .showcase-track {
+          gap: 1rem;
+          padding: 0 1rem 1rem;
+        }
+
         .showcase-card {
           flex-basis: min(88vw, 520px);
           min-height: auto;
-          scroll-snap-align: center;
+          scroll-snap-align: start;
         }
 
         .timeline::before {
