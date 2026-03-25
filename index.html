@@ -1250,7 +1250,7 @@
       }
 
       .footer {
-        padding: 1.2rem 0 2.5rem;
+        padding: 2rem 0 3rem;
       }
 
       .footer__shell {
@@ -1258,23 +1258,16 @@
         margin-inline: auto;
         padding-top: 1.5rem;
         border-top: 1px solid rgba(114, 245, 164, 0.1);
-        color: var(--muted);
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
       }
 
-      .footer__ascii {
-        width: max-content;
-        min-width: 100%;
-        margin: 0 auto;
-        font-size: clamp(0.64rem, 1vw, 0.84rem);
-        line-height: 1.55;
-        white-space: pre;
-        text-align: center;
-      }
-
-      .footer__ascii span {
-        display: block;
+      .footer__cursor {
+        display: inline-block;
+        width: 0.55em;
+        height: 0.9em;
+        background: var(--acid);
+        opacity: 0.85;
+        vertical-align: text-bottom;
+        animation: blink 1.1s step-end infinite;
       }
 
       .toast {
@@ -2001,13 +1994,20 @@
 
     <footer class="footer">
       <div class="footer__shell">
-        <div class="footer__ascii mono" aria-label="Footer disclaimer">
-          <span>╔══════════════════════════════════════════════════════════════╗</span>
-          <span>║  ©<span id="year">2026</span> Francesco Laterza                                          ║</span>
-          <span>║  No AI was harmed in the making of this website.           ║</span>
-          <span>║  Powered by caffeine, curiosity &amp; cutting-edge tech.         ║</span>
-          <span>╚══════════════════════════════════════════════════════════════╝</span>
-        </div>
+        <article class="glass-panel terminal-panel">
+          <div class="terminal-bar">
+            <div class="terminal-dots" aria-hidden="true">
+              <span></span><span></span><span></span>
+            </div>
+            <span class="terminal-label mono">system / EOF</span>
+          </div>
+          <div class="terminal-screen mono">
+            <p><span class="prompt">&gt; get_credits()</span></p>
+            <p class="dim">© <span id="year">2026</span> Francesco Laterza — All rights reserved.</p>
+            <p class="dim">No AI was harmed. Powered by caffeine, curiosity &amp; cutting-edge tech.</p>
+            <p><span class="prompt">&gt;</span> <span class="footer__cursor" aria-hidden="true"></span></p>
+          </div>
+        </article>
       </div>
     </footer>
 
