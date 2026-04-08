@@ -1817,15 +1817,39 @@
         padding: 0.2rem 0;
       }
       .pc-prompt { color: var(--accent); margin-right: 0.4rem; }
-      .pc-typing { display: flex; gap: 0.3rem; align-items: center; padding: 0.5rem 0; }
-      .pc-typing span {
+      .pc-typing {
+        display: grid;
+        gap: 0.5rem;
+        padding: 0.75rem 0.9rem;
+        border: 1px solid rgba(114, 245, 164, 0.12);
+        border-radius: 16px;
+        background: rgba(7, 16, 11, 0.46);
+      }
+      .pc-loader-line {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.35rem;
+      }
+      .pc-loader-text {
+        color: var(--muted);
+        font-size: 0.72rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      .pc-loader-track {
+        display: flex;
+        gap: 0.3rem;
+        align-items: center;
+      }
+      .pc-loader-track span {
         width: 6px; height: 6px;
         background: var(--accent);
         border-radius: 50%;
         animation: pcBounce 1.2s infinite;
       }
-      .pc-typing span:nth-child(2) { animation-delay: 0.2s; }
-      .pc-typing span:nth-child(3) { animation-delay: 0.4s; }
+      .pc-loader-track span:nth-child(2) { animation-delay: 0.2s; }
+      .pc-loader-track span:nth-child(3) { animation-delay: 0.4s; }
       @keyframes pcBounce {
         0%, 80%, 100% { opacity: 0.3; transform: scale(0.8); }
         40% { opacity: 1; transform: scale(1); }
@@ -2687,7 +2711,7 @@
        CHAT SYSTEM
        ============================================================ */
     (function () {
-      const CHAT_PROXY_URL = 'https://script.google.com/macros/s/AKfycbwr4EgtP2CK2_8FS30VEpoLoTw9LfUuyTnEm04Xu-PQSzedcCmuypyyKnerv0uo61If/exec';
+      const CHAT_PROXY_URL = 'https://script.google.com/macros/s/AKfycbyduOGBf67iJC0TIrqOITaa5vQxIcNhvHwydUFPYdHJ4I12n1R-R-i_MdsLPpTiIikX/exec';
       const mobileChatQuery = window.matchMedia("(max-width: 900px), (pointer: coarse)");
 
       const SECTIONS = {
@@ -2713,10 +2737,17 @@
         }
       };
 
+      const LOADER_LINES = [
+        "Checking Francesco's signal...",
+        "Scanning projects and expertise...",
+        "Drafting a sharp reply..."
+      ];
+
       let activeSection = 'home';
       let chatOpen = false;
       let chatSessionId = null;
       let chatTrigger = null;
+      let conversationHistory = [];
       let proxyWarmupPromise = null;
       let isSending = false;
 
@@ -2727,6 +2758,7 @@
         if (best && best !== activeSection) {
           activeSection = best;
           chatSessionId = null;
+          conversationHistory = [];
         }
       }, { threshold: [0.2, 0.5, 0.8] });
 
@@ -2737,6 +2769,7 @@
         if (chatOpen) return;
         chatOpen = true;
         updateChatTrigger();
+        warmChatProxy();
         buildChatUI();
       }
 
@@ -2745,6 +2778,7 @@
         const panel = document.getElementById('particle-chat');
         if (panel) { panel.classList.remove('pc-open'); setTimeout(() => panel.remove(), 300); }
         chatSessionId = null;
+        conversationHistory = [];
         updateChatTrigger();
       }
 
@@ -2841,7 +2875,27 @@
         return proxyWarmupPromise;
       }
 
-      async function requestChatReply(requestUrl) {
+      function setChatBusy(busy) {
+        const panel = document.getElementById('particle-chat');
+        if (!panel) return;
+
+        panel.querySelectorAll('.pc-suggestion').forEach(button => {
+          button.disabled = busy;
+          button.style.opacity = busy ? '0.55' : '';
+          button.style.pointerEvents = busy ? 'none' : '';
+        });
+
+        const input = panel.querySelector('.pc-input');
+        const send = panel.querySelector('.pc-send');
+
+        if (input) input.disabled = busy;
+        if (send) {
+          send.disabled = busy;
+          send.style.opacity = busy ? '0.55' : '';
+        }
+      }
+
+      async function requestChatReply(payload) {
         let lastError = null;
 
         for (let attempt = 0; attempt < 3; attempt += 1) {
@@ -2849,9 +2903,14 @@
           const timeout = window.setTimeout(() => controller.abort(), 18000);
 
           try {
-            const res = await fetch(requestUrl.toString(), {
+            const res = await fetch(CHAT_PROXY_URL, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'text/plain;charset=utf-8'
+              },
               cache: 'no-store',
-              signal: controller.signal
+              signal: controller.signal,
+              body: JSON.stringify(payload)
             });
             const data = await res.json();
 
@@ -2923,33 +2982,63 @@
         msgEl.querySelector('.pc-suggestions')?.remove();
         appendMsg(msgEl, text, 'user');
         isSending = true;
+        setChatBusy(true);
 
         const typing = document.createElement('div');
         typing.className = 'pc-msg pc-msg--ai pc-typing';
-        typing.innerHTML = '<span></span><span></span><span></span>';
+        typing.innerHTML = `
+          <div class="pc-loader-line">
+            <span class="pc-prompt">fra@laterza:~$</span>
+            <span class="pc-loader-text">${LOADER_LINES[0]}</span>
+          </div>
+          <div class="pc-loader-track" aria-hidden="true">
+            <span></span><span></span><span></span>
+          </div>
+        `;
         msgEl.appendChild(typing);
         msgEl.scrollTop = msgEl.scrollHeight;
+        const loaderText = typing.querySelector('.pc-loader-text');
+        let loaderIndex = 0;
+        const loaderTimer = window.setInterval(() => {
+          if (!loaderText) return;
+          loaderIndex = (loaderIndex + 1) % LOADER_LINES.length;
+          loaderText.textContent = LOADER_LINES[loaderIndex];
+        }, 1100);
 
         const sec = SECTIONS[activeSection] || SECTIONS.home;
-        const requestUrl = new URL(CHAT_PROXY_URL);
-        requestUrl.searchParams.set('message', text);
-        requestUrl.searchParams.set('sessionId', getChatSessionId());
-        requestUrl.searchParams.set('turnId', createChatId('pc-turn'));
-        requestUrl.searchParams.set('section', activeSection);
-        requestUrl.searchParams.set('sectionContext', sec.context);
-        requestUrl.searchParams.set('language', detectUserLanguage(text));
-        requestUrl.searchParams.set('pageUrl', window.location.href);
+        const userMessage = {
+          role: 'user',
+          parts: [{ text }]
+        };
+        const payload = {
+          message: text,
+          history: conversationHistory.slice(-20),
+          sessionId: getChatSessionId(),
+          turnId: createChatId('pc-turn'),
+          section: activeSection,
+          sectionContext: sec.context,
+          language: detectUserLanguage(text),
+          pageUrl: window.location.href,
+          userAgent: navigator.userAgent
+        };
 
         try {
           await warmChatProxy();
-          const reply = await requestChatReply(requestUrl);
+          const reply = await requestChatReply(payload);
+          window.clearInterval(loaderTimer);
+          conversationHistory.push(
+            userMessage,
+            { role: 'model', parts: [{ text: reply }] }
+          );
           typing.remove();
           appendMsg(msgEl, reply, 'ai');
         } catch (error) {
+          window.clearInterval(loaderTimer);
           typing.remove();
           appendMsg(msgEl, getFriendlyChatError(error), 'ai');
         } finally {
           isSending = false;
+          setChatBusy(false);
         }
         msgEl.scrollTop = msgEl.scrollHeight;
       }
