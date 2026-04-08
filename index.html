@@ -1530,6 +1530,173 @@
           scroll-behavior: auto !important;
         }
       }
+
+      /* ============================================================
+         PARTICLE CHAT
+         ============================================================ */
+      #particle-chat {
+        position: fixed;
+        bottom: 2rem;
+        right: 2rem;
+        width: min(420px, calc(100vw - 2rem));
+        background: rgba(4, 14, 8, 0.92);
+        border: 1px solid rgba(114, 245, 164, 0.2);
+        border-radius: 24px;
+        backdrop-filter: blur(18px);
+        z-index: 200;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        opacity: 0;
+        transform: translateY(16px) scale(0.97);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+        box-shadow: 0 0 40px rgba(114, 245, 164, 0.08), 0 24px 48px rgba(0,0,0,0.5);
+      }
+      #particle-chat.pc-open {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+      .pc-bar {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.9rem 1.2rem;
+        border-bottom: 1px solid rgba(114, 245, 164, 0.12);
+      }
+      .pc-dots { display: flex; gap: 0.4rem; }
+      .pc-dots span { width: 11px; height: 11px; border-radius: 50%; }
+      .pc-dots span:nth-child(1) { background: #ff6f7d; }
+      .pc-dots span:nth-child(2) { background: #ffd166; }
+      .pc-dots span:nth-child(3) { background: #72f5a4; }
+      .pc-label {
+        flex: 1;
+        font-family: 'IBM Plex Mono', monospace;
+        font-size: 0.72rem;
+        letter-spacing: 0.2em;
+        color: var(--muted);
+        text-transform: uppercase;
+      }
+      .pc-close {
+        background: none;
+        border: none;
+        color: var(--muted);
+        font-size: 1.2rem;
+        cursor: pointer;
+        line-height: 1;
+        padding: 0 0.2rem;
+        transition: color 0.2s;
+      }
+      .pc-close:hover { color: var(--accent); }
+      .pc-messages {
+        flex: 1;
+        overflow-y: auto;
+        padding: 1rem 1.2rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        max-height: 340px;
+        min-height: 140px;
+      }
+      .pc-messages::-webkit-scrollbar { width: 4px; }
+      .pc-messages::-webkit-scrollbar-track { background: transparent; }
+      .pc-messages::-webkit-scrollbar-thumb { background: rgba(114, 245, 164, 0.2); border-radius: 2px; }
+      .pc-suggestions { display: flex; flex-direction: column; gap: 0.5rem; }
+      .pc-suggestion {
+        background: rgba(114, 245, 164, 0.06);
+        border: 1px solid rgba(114, 245, 164, 0.18);
+        border-radius: 12px;
+        color: var(--accent);
+        font-family: 'IBM Plex Mono', monospace;
+        font-size: 0.75rem;
+        padding: 0.6rem 0.9rem;
+        cursor: pointer;
+        text-align: left;
+        transition: background 0.2s, border-color 0.2s;
+      }
+      .pc-suggestion:hover {
+        background: rgba(114, 245, 164, 0.12);
+        border-color: rgba(114, 245, 164, 0.4);
+      }
+      .pc-msg {
+        font-family: 'IBM Plex Mono', monospace;
+        font-size: 0.78rem;
+        line-height: 1.6;
+        max-width: 88%;
+      }
+      .pc-msg--user {
+        align-self: flex-end;
+        background: rgba(114, 245, 164, 0.1);
+        border: 1px solid rgba(114, 245, 164, 0.2);
+        border-radius: 14px 14px 4px 14px;
+        padding: 0.5rem 0.8rem;
+        color: var(--accent);
+      }
+      .pc-msg--ai {
+        align-self: flex-start;
+        color: var(--fg);
+        padding: 0.2rem 0;
+      }
+      .pc-prompt { color: var(--accent); margin-right: 0.4rem; }
+      .pc-typing { display: flex; gap: 0.3rem; align-items: center; padding: 0.5rem 0; }
+      .pc-typing span {
+        width: 6px; height: 6px;
+        background: var(--accent);
+        border-radius: 50%;
+        animation: pcBounce 1.2s infinite;
+      }
+      .pc-typing span:nth-child(2) { animation-delay: 0.2s; }
+      .pc-typing span:nth-child(3) { animation-delay: 0.4s; }
+      @keyframes pcBounce {
+        0%, 80%, 100% { opacity: 0.3; transform: scale(0.8); }
+        40% { opacity: 1; transform: scale(1); }
+      }
+      .pc-form {
+        display: flex;
+        gap: 0.5rem;
+        padding: 0.8rem 1.2rem;
+        border-top: 1px solid rgba(114, 245, 164, 0.12);
+      }
+      .pc-input {
+        flex: 1;
+        background: rgba(114, 245, 164, 0.05);
+        border: 1px solid rgba(114, 245, 164, 0.15);
+        border-radius: 12px;
+        color: var(--fg);
+        font-family: 'IBM Plex Mono', monospace;
+        font-size: 0.78rem;
+        padding: 0.5rem 0.8rem;
+        outline: none;
+        transition: border-color 0.2s;
+      }
+      .pc-input:focus { border-color: rgba(114, 245, 164, 0.4); }
+      .pc-input::placeholder { color: var(--muted); }
+      .pc-send {
+        background: rgba(114, 245, 164, 0.12);
+        border: 1px solid rgba(114, 245, 164, 0.25);
+        border-radius: 12px;
+        color: var(--accent);
+        cursor: pointer;
+        padding: 0.5rem 0.7rem;
+        font-size: 1rem;
+        transition: background 0.2s;
+      }
+      .pc-send:hover { background: rgba(114, 245, 164, 0.22); }
+      .pc-hint {
+        position: fixed;
+        font-family: 'IBM Plex Mono', monospace;
+        font-size: 0.65rem;
+        color: rgba(114, 245, 164, 0.5);
+        letter-spacing: 0.12em;
+        pointer-events: none;
+        z-index: 50;
+        text-transform: uppercase;
+        animation: pcHintPulse 2.5s ease-in-out infinite;
+        white-space: nowrap;
+      }
+      @keyframes pcHintPulse {
+        0%, 100% { opacity: 0.4; }
+        50% { opacity: 0.9; }
+      }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
@@ -2385,6 +2552,314 @@
 
         }
       });
+    </script>
+
+    <script>
+    /* ============================================================
+       PARTICLE CHAT SYSTEM
+       ============================================================ */
+    (function () {
+      const CHAT_PROXY_URL = 'https://script.google.com/macros/s/AKfycbwr4EgtP2CK2_8FS30VEpoLoTw9LfUuyTnEm04Xu-PQSzedcCmuypyyKnerv0uo61If/exec';
+
+      const SECTIONS = {
+        home: {
+          context: 'The visitor is on the hero/intro section. Francesco is introduced as a Creative Technologist and CTO based in Rome.',
+          questions: ['Who is Francesco Laterza?', 'What does a Creative Technologist do?', 'How can I collaborate with him?']
+        },
+        about: {
+          context: 'The visitor is viewing the about section, covering Francesco\'s multidisciplinary background: tech leadership, immersive tech, digital fabrication, and education.',
+          questions: ['What is his background?', 'What makes his approach distinctive?', 'Which technologies does he specialize in?']
+        },
+        skills: {
+          context: 'The visitor is viewing the skills/showcase section: web development, GenAI, VR/AR immersive experiences, and digital fabrication.',
+          questions: ['What is his main technical stack?', 'How does he work with GenAI?', 'What does immersive tech mean in his work?']
+        },
+        experience: {
+          context: 'The visitor is viewing the experience/timeline section with Francesco\'s career milestones and projects.',
+          questions: ['What has he mainly worked on?', 'What is his most significant project?', 'What kinds of organizations has he collaborated with?']
+        },
+        contact: {
+          context: 'The visitor is on the contact section, looking for ways to reach Francesco or start a collaboration.',
+          questions: ['How can I contact Francesco?', 'What kinds of projects is he open to?', 'What is the best way to collaborate?']
+        }
+      };
+
+      /* ── State ── */
+      let activeSection = 'home';
+      let chatOpen = false;
+      let particles = [];
+      let animFrame = null;
+      let chatSessionId = null;
+      let hintEl = null;
+
+      /* ── Canvas ── */
+      const canvas = document.createElement('canvas');
+      canvas.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:49;';
+      document.body.appendChild(canvas);
+      const ctx = canvas.getContext('2d');
+
+      function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+      resizeCanvas();
+      window.addEventListener('resize', () => { resizeCanvas(); rebuildParticles(); });
+
+      /* ── Particle ── */
+      class Particle {
+        constructor(x, y) {
+          this.x = x; this.y = y;
+          this.vx = (Math.random() - 0.5) * 0.6;
+          this.vy = (Math.random() - 0.5) * 0.6;
+          this.size = Math.random() * 2 + 0.5;
+          this.opacity = Math.random() * 0.5 + 0.15;
+          this.opacityDir = (Math.random() - 0.5) * 0.008;
+          this.color = Math.random() > 0.45 ? '114,245,164' : '115,223,247';
+        }
+
+        update(rect) {
+          if (!rect) return;
+          const nearest = nearestPerimeterPoint(this.x, this.y, rect);
+          const dx = nearest.x - this.x;
+          const dy = nearest.y - this.y;
+          const dist = Math.hypot(dx, dy);
+          if (dist > 4) { this.vx += dx * 0.004; this.vy += dy * 0.004; }
+          this.vx += (Math.random() - 0.5) * 0.15;
+          this.vy += (Math.random() - 0.5) * 0.15;
+          this.vx *= 0.94; this.vy *= 0.94;
+          this.x += this.vx; this.y += this.vy;
+          this.opacity += this.opacityDir;
+          if (this.opacity > 0.75 || this.opacity < 0.08) this.opacityDir *= -1;
+        }
+
+        draw() {
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(${this.color},${this.opacity})`;
+          ctx.fill();
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.size * 3, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(${this.color},${this.opacity * 0.12})`;
+          ctx.fill();
+        }
+      }
+
+      function nearestPerimeterPoint(px, py, rect) {
+        const m = 6;
+        const t = rect.top + m, b = rect.bottom - m;
+        const l = rect.left + m, r = rect.right - m;
+        const dT = Math.abs(py - t), dB = Math.abs(py - b);
+        const dL = Math.abs(px - l), dR = Math.abs(px - r);
+        const min = Math.min(dT, dB, dL, dR);
+        let x = Math.max(l, Math.min(r, px));
+        let y = Math.max(t, Math.min(b, py));
+        if (min === dT) y = t;
+        else if (min === dB) y = b;
+        else if (min === dL) x = l;
+        else x = r;
+        return { x, y };
+      }
+
+      function randomPerimeterPoint(rect) {
+        const m = 6;
+        const w = rect.width - m * 2, h = rect.height - m * 2;
+        const perim = 2 * (w + h);
+        const t = Math.random() * perim;
+        if (t < w)           return { x: rect.left + m + t,         y: rect.top + m };
+        if (t < w + h)       return { x: rect.right - m,            y: rect.top + m + (t - w) };
+        if (t < 2 * w + h)   return { x: rect.right - m - (t-w-h), y: rect.bottom - m };
+                             return { x: rect.left + m,             y: rect.bottom - m - (t - 2*w - h) };
+      }
+
+      function getRect() {
+        const el = document.getElementById(activeSection);
+        return el ? el.getBoundingClientRect() : null;
+      }
+
+      function rebuildParticles() {
+        particles = [];
+        const rect = getRect();
+        if (!rect) return;
+        for (let i = 0; i < 55; i++) {
+          const { x, y } = randomPerimeterPoint(rect);
+          particles.push(new Particle(x, y));
+        }
+      }
+
+      /* ── Animation loop ── */
+      function animate() {
+        animFrame = requestAnimationFrame(animate);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        if (chatOpen) return;
+        const rect = getRect();
+        particles.forEach(p => { p.update(rect); p.draw(); });
+      }
+
+      /* ── Section observer ── */
+      const observer = new IntersectionObserver(entries => {
+        let best = null, bestRatio = 0;
+        entries.forEach(e => { if (e.intersectionRatio > bestRatio) { bestRatio = e.intersectionRatio; best = e.target.id; } });
+        if (best && best !== activeSection) {
+          activeSection = best;
+          chatSessionId = null;
+          rebuildParticles();
+          showHint();
+        }
+      }, { threshold: [0.2, 0.5, 0.8] });
+
+      document.querySelectorAll('section[id]').forEach(s => observer.observe(s));
+
+      /* ── Edge click detection ── */
+      document.addEventListener('click', e => {
+        if (chatOpen) return;
+        const rect = getRect();
+        if (!rect) return;
+        const { clientX: x, clientY: y } = e;
+        const zone = 36;
+        const onEdge =
+          (Math.abs(y - rect.top)    < zone && x > rect.left && x < rect.right) ||
+          (Math.abs(y - rect.bottom) < zone && x > rect.left && x < rect.right) ||
+          (Math.abs(x - rect.left)   < zone && y > rect.top  && y < rect.bottom) ||
+          (Math.abs(x - rect.right)  < zone && y > rect.top  && y < rect.bottom);
+        if (onEdge) openChat();
+      });
+
+      /* ── Hint label ── */
+      function showHint() {
+        if (hintEl) hintEl.remove();
+        const rect = getRect();
+        if (!rect) return;
+        hintEl = document.createElement('div');
+        hintEl.className = 'pc-hint';
+        hintEl.textContent = '[ tap the edge to chat ]';
+        hintEl.style.left = `${rect.left + rect.width / 2}px`;
+        hintEl.style.top  = `${rect.bottom - 28}px`;
+        hintEl.style.transform = 'translateX(-50%)';
+        document.body.appendChild(hintEl);
+        setTimeout(() => { if (hintEl) { hintEl.style.transition = 'opacity 0.6s'; hintEl.style.opacity = '0'; setTimeout(() => hintEl && hintEl.remove(), 700); } }, 3500);
+      }
+
+      /* ── Chat open/close ── */
+      function openChat() {
+        chatOpen = true;
+        if (hintEl) hintEl.remove();
+        particles.forEach(p => { p.vx = (Math.random() - 0.5) * 10; p.vy = (Math.random() - 0.5) * 10; });
+        setTimeout(() => { particles = []; }, 500);
+        buildChatUI();
+      }
+
+      function closeChat() {
+        chatOpen = false;
+        const panel = document.getElementById('particle-chat');
+        if (panel) { panel.classList.remove('pc-open'); setTimeout(() => panel.remove(), 300); }
+        chatSessionId = null;
+        setTimeout(rebuildParticles, 350);
+      }
+
+      function createChatId(prefix = 'pc') {
+        if (window.crypto?.randomUUID) return crypto.randomUUID();
+        return `${prefix}-${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
+      }
+
+      function getChatSessionId() {
+        if (!chatSessionId) chatSessionId = createChatId('pc-session');
+        return chatSessionId;
+      }
+
+      function detectUserLanguage(text) {
+        return /[àèéìòù]|\b(ciao|come|grazie|progetto|contatto|lavoro)\b/i.test(text) ? 'it' : 'en';
+      }
+
+      /* ── Chat UI ── */
+      function buildChatUI() {
+        const existing = document.getElementById('particle-chat');
+        if (existing) existing.remove();
+        const sec = SECTIONS[activeSection] || SECTIONS.home;
+        const panel = document.createElement('div');
+        panel.id = 'particle-chat';
+        panel.innerHTML = `
+          <div class="pc-bar">
+            <div class="pc-dots"><span></span><span></span><span></span></div>
+            <span class="pc-label">Ask Francesco</span>
+            <button class="pc-close" aria-label="Close">×</button>
+          </div>
+          <div class="pc-messages" id="pc-messages">
+            <div class="pc-suggestions">
+              ${sec.questions.map(q => `<button class="pc-suggestion">${q}</button>`).join('')}
+            </div>
+          </div>
+          <form class="pc-form" id="pc-form">
+            <input class="pc-input" type="text" placeholder="Write a message…" autocomplete="off" />
+            <button type="submit" class="pc-send"><i class="ri-send-plane-line"></i></button>
+          </form>`;
+        document.body.appendChild(panel);
+        requestAnimationFrame(() => panel.classList.add('pc-open'));
+
+        panel.querySelector('.pc-close').addEventListener('click', closeChat);
+        panel.querySelectorAll('.pc-suggestion').forEach(btn =>
+          btn.addEventListener('click', () => sendMessage(btn.textContent))
+        );
+        panel.querySelector('#pc-form').addEventListener('submit', e => {
+          e.preventDefault();
+          const inp = e.target.querySelector('.pc-input');
+          const txt = inp.value.trim();
+          if (txt) { inp.value = ''; sendMessage(txt); }
+        });
+      }
+
+      /* ── Gemini call ── */
+      async function sendMessage(text) {
+        const msgEl = document.getElementById('pc-messages');
+        if (!msgEl) return;
+        msgEl.querySelector('.pc-suggestions')?.remove();
+        appendMsg(msgEl, text, 'user');
+
+        const typing = document.createElement('div');
+        typing.className = 'pc-msg pc-msg--ai pc-typing';
+        typing.innerHTML = '<span></span><span></span><span></span>';
+        msgEl.appendChild(typing);
+        msgEl.scrollTop = msgEl.scrollHeight;
+
+        const sec = SECTIONS[activeSection] || SECTIONS.home;
+        const requestUrl = new URL(CHAT_PROXY_URL);
+        requestUrl.searchParams.set('message', text);
+        requestUrl.searchParams.set('sessionId', getChatSessionId());
+        requestUrl.searchParams.set('turnId', createChatId('pc-turn'));
+        requestUrl.searchParams.set('section', activeSection);
+        requestUrl.searchParams.set('sectionContext', sec.context);
+        requestUrl.searchParams.set('language', detectUserLanguage(text));
+        requestUrl.searchParams.set('pageUrl', window.location.href);
+
+        try {
+          const res = await fetch(requestUrl.toString());
+          const data = await res.json();
+          if (!res.ok || !data.ok) throw new Error(data.error || 'Chat proxy error');
+          const reply = data.reply || 'Sorry, I can\'t respond right now.';
+          typing.remove();
+          appendMsg(msgEl, reply, 'ai');
+        } catch {
+          typing.remove();
+          appendMsg(msgEl, 'Connection error. Please try again in a moment.', 'ai');
+        }
+        msgEl.scrollTop = msgEl.scrollHeight;
+      }
+
+      function appendMsg(container, text, role) {
+        const div = document.createElement('div');
+        div.className = `pc-msg pc-msg--${role}`;
+        if (role === 'ai') {
+          div.innerHTML = `<span class="pc-prompt">fra@laterza:~$</span> ${text.replace(/</g,'&lt;').replace(/>/g,'&gt;')}`;
+        } else {
+          div.textContent = text;
+        }
+        container.appendChild(div);
+      }
+
+      /* ── Init ── */
+      rebuildParticles();
+      animate();
+      setTimeout(showHint, 1200);
+    })();
     </script>
   </body>
 </html>
