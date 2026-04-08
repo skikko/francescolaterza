@@ -850,9 +850,8 @@
       }
 
       .showcase-frame {
-        width: min(calc(var(--max-width) + 14rem), 100%);
+        width: min(var(--max-width), calc(100% - 2.5rem));
         margin-inline: auto;
-        overflow: hidden;
       }
 
       .showcase-sticky {
@@ -860,16 +859,16 @@
       }
 
       .showcase-track {
-        display: flex;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 1.2rem;
-        width: max-content;
-        padding: 0 1.25rem 1.1rem;
+        width: 100%;
+        padding: 0;
       }
 
       .showcase-card {
         position: relative;
-        flex: 0 0 min(76vw, 540px);
-        min-height: 72vh;
+        min-height: 34rem;
         overflow: hidden;
         padding: 1.9rem;
         border: 1px solid rgba(114, 245, 164, 0.14);
@@ -1393,11 +1392,29 @@
         }
 
         .hero {
+          min-height: auto;
           padding-top: 7.2rem;
+          padding-bottom: 2.8rem;
+          align-items: flex-start;
+        }
+
+        .hero__inner {
+          gap: 1.9rem;
+          padding-bottom: 0;
+        }
+
+        .hero-copy {
+          max-width: none;
         }
 
         .hero-title__text {
           font-size: clamp(2.8rem, 12vw, 4.6rem);
+        }
+
+        .role-rotator {
+          max-width: 100%;
+          flex-wrap: wrap;
+          row-gap: 0.35rem;
         }
 
         .hero-stats {
@@ -1410,6 +1427,8 @@
 
         .hero-contacts {
           max-width: none;
+          display: grid;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
         }
 
         .showcase-metrics {
@@ -1417,20 +1436,16 @@
         }
 
         .showcase-frame {
-          overflow-x: auto;
-          scroll-snap-type: x mandatory;
-          -webkit-overflow-scrolling: touch;
+          width: min(var(--max-width), calc(100% - 1.25rem));
         }
 
         .showcase-track {
+          grid-template-columns: 1fr;
           gap: 1rem;
-          padding: 0 1rem 1rem;
         }
 
         .showcase-card {
-          flex-basis: min(88vw, 520px);
           min-height: auto;
-          scroll-snap-align: start;
         }
 
         .timeline::before {
@@ -1461,30 +1476,126 @@
           grid-template-columns: 1fr;
         }
 
+        .section-shell,
+        .footer__shell {
+          width: calc(100% - 1rem);
+        }
+
+        .site-header {
+          inset-block-start: 0.5rem;
+        }
+
+        .header-shell {
+          gap: 0.55rem;
+          padding: 0.78rem 0.8rem;
+          border-radius: 20px;
+        }
+
         .brand__kicker {
-          font-size: 0.62rem;
-          letter-spacing: 0.16em;
+          font-size: 0.56rem;
+          letter-spacing: 0.14em;
         }
 
         .brand__name {
-          font-size: 0.96rem;
-          letter-spacing: 0.05em;
+          font-size: 0.88rem;
+          letter-spacing: 0.04em;
         }
 
         body::before {
           opacity: 0.12;
         }
 
+        .hero {
+          min-height: auto;
+          padding-top: 6rem;
+          padding-bottom: 2.4rem;
+        }
+
         .hero__grid {
-          background-size: 34px 34px;
+          inset: auto -14% -8%;
+          height: 58%;
+          opacity: 0.16;
+          background-size: 30px 30px;
+        }
+
+        .hero__orb--one {
+          top: -8rem;
+          right: -12rem;
+          width: 28rem;
+          height: 28rem;
+          filter: blur(62px);
+        }
+
+        .hero__orb--two {
+          left: -12rem;
+          bottom: -8rem;
+          width: 22rem;
+          height: 22rem;
+          filter: blur(56px);
         }
 
         .hero__inner {
-          gap: 1.6rem;
+          gap: 1.2rem;
+        }
+
+        .hero-copy .eyebrow {
+          max-width: 19rem;
+          font-size: 0.75rem;
+          line-height: 1.5;
+          letter-spacing: 0.18em;
+        }
+
+        .hero-title {
+          margin: 0.35rem 0 0.55rem;
+          gap: 0.12rem;
+        }
+
+        .hero-title__text {
+          font-size: clamp(1.82rem, 9.2vw, 2.55rem);
+          line-height: 0.92;
+          letter-spacing: -0.045em;
+        }
+
+        .hero-title__caption {
+          margin: 0 0 0.9rem;
+          font-size: 0.88rem;
+          letter-spacing: 0.14em;
+        }
+
+        .hero-copy__lead {
+          max-width: none;
+          font-size: 0.98rem;
+        }
+
+        .role-rotator {
+          display: flex;
+          width: 100%;
+          justify-content: flex-start;
+          gap: 0.45rem;
+          padding: 0.85rem 0.95rem;
+          border-radius: 18px;
+          margin-top: 1rem;
+          font-size: 0.68rem;
+          letter-spacing: 0.14em;
+        }
+
+        #role-rotator {
+          letter-spacing: 0.02em;
         }
 
         .hero-contacts {
-          gap: 0.8rem;
+          grid-template-columns: 1fr;
+          gap: 0.65rem;
+          margin-top: 0.9rem;
+        }
+
+        .hero-contact {
+          padding: 0.82rem 0.9rem;
+          border-radius: 16px;
+        }
+
+        .hero-contact strong {
+          font-size: 0.9rem;
         }
 
         .button {
@@ -1493,6 +1604,17 @@
 
         .hero-stats {
           grid-template-columns: 1fr;
+          gap: 0.7rem;
+          margin-top: 0.9rem;
+        }
+
+        .stat-card {
+          padding: 1rem 0.95rem;
+          border-radius: 20px;
+        }
+
+        .stat-card__value {
+          font-size: 1.8rem;
         }
 
         .stat-card:last-child {
@@ -1500,12 +1622,70 @@
         }
 
         .portrait-shell {
-          min-height: 430px;
-          padding: 1rem;
+          min-height: 340px;
+          padding: 0.85rem;
+          border-radius: 24px;
         }
 
         .portrait-photo {
-          inset: 1rem;
+          inset: 0.85rem;
+          border-radius: 20px;
+        }
+
+        .portrait-badge {
+          top: 1rem;
+          left: 1rem;
+          padding: 0.58rem 0.74rem;
+          font-size: 0.65rem;
+        }
+
+        .portrait-ring,
+        .portrait-ring--two {
+          display: none;
+        }
+
+        .section {
+          padding-block: 4rem;
+          scroll-margin-top: 6.5rem;
+        }
+
+        .section--about {
+          padding-top: 4.5rem;
+        }
+
+        .section-heading {
+          max-width: none;
+          margin-bottom: 2rem;
+        }
+
+        .section-title {
+          font-size: clamp(1.62rem, 8.4vw, 2.18rem);
+          letter-spacing: -0.04em;
+          line-height: 0.96;
+        }
+
+        .section-copy {
+          max-width: none;
+          font-size: 0.98rem;
+        }
+
+        .contact-grid {
+          gap: 0.9rem;
+        }
+
+        .contact-panel,
+        .contact-terminal {
+          padding: 1.2rem;
+        }
+
+        .command-list li {
+          padding: 0.9rem 0.9rem 0.9rem 2.7rem;
+        }
+
+        .contact-actions {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 0.75rem;
         }
 
         .showcase-card,
@@ -1696,6 +1876,90 @@
       @keyframes pcHintPulse {
         0%, 100% { opacity: 0.4; }
         50% { opacity: 0.9; }
+      }
+
+      .pc-chat-trigger {
+        position: fixed;
+        right: 0.8rem;
+        bottom: calc(env(safe-area-inset-bottom, 0px) + 0.8rem);
+        display: inline-flex;
+        align-items: center;
+        gap: 0.65rem;
+        padding: 0.8rem 0.92rem;
+        border: 1px solid rgba(114, 245, 164, 0.22);
+        border-radius: 999px;
+        background: rgba(6, 16, 10, 0.92);
+        color: var(--text);
+        box-shadow: 0 14px 32px rgba(0, 0, 0, 0.28);
+        backdrop-filter: blur(18px);
+        z-index: 210;
+        transition:
+          transform 0.25s ease,
+          opacity 0.25s ease,
+          border-color 0.25s ease;
+      }
+
+      .pc-chat-trigger i {
+        font-size: 1rem;
+        color: var(--accent);
+      }
+
+      .pc-chat-trigger span {
+        font-size: 0.72rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+
+      .pc-chat-trigger.is-hidden {
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(14px);
+      }
+
+      body.is-mobile-chat main {
+        padding-bottom: 5.25rem;
+      }
+
+      body.is-mobile-chat #particle-chat {
+        left: 0.5rem;
+        right: 0.5rem;
+        bottom: calc(env(safe-area-inset-bottom, 0px) + 0.6rem);
+        width: auto;
+        max-width: none;
+        max-height: min(72svh, 36rem);
+        border-radius: 22px;
+      }
+
+      body.is-mobile-chat .pc-bar,
+      body.is-mobile-chat .pc-form {
+        padding-inline: 1rem;
+      }
+
+      body.is-mobile-chat .pc-messages {
+        max-height: min(46svh, 19rem);
+        padding-inline: 1rem;
+      }
+
+      body.is-mobile-chat .pc-msg {
+        max-width: 100%;
+      }
+
+      body.is-mobile-chat .pc-hint {
+        display: none !important;
+      }
+
+      @media (max-width: 640px) {
+        .pc-chat-trigger {
+          min-width: 52px;
+          min-height: 52px;
+          justify-content: center;
+          padding: 0.85rem;
+          border-radius: 18px;
+        }
+
+        .pc-chat-trigger span {
+          display: none;
+        }
       }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
@@ -2369,32 +2633,6 @@
         if (window.gsap && window.ScrollTrigger && !prefersReducedMotion) {
           window.gsap.registerPlugin(window.ScrollTrigger);
 
-          window.gsap.from(".hero-title__text", {
-            yPercent: 120,
-            duration: 1.05,
-            stagger: 0.12,
-            ease: "power4.out",
-            delay: 0.15
-          });
-
-          window.gsap.from(".hero-title__caption, .hero-copy__lead, .role-rotator, .hero-contacts, .hero-stats .stat-card", {
-            opacity: 0,
-            y: 32,
-            duration: 0.9,
-            stagger: 0.12,
-            delay: 0.38,
-            ease: "power3.out"
-          });
-
-          window.gsap.from(".portrait-shell", {
-            opacity: 0,
-            scale: 0.93,
-            y: 40,
-            duration: 1.1,
-            delay: 0.24,
-            ease: "power3.out"
-          });
-
           document.querySelectorAll("[data-reveal]").forEach(function (element) {
             const reveal = element.getAttribute("data-reveal");
             const fromState =
@@ -2425,116 +2663,6 @@
             );
           });
 
-          window.gsap.to(".hero__orb--one", {
-            yPercent: 22,
-            xPercent: -10,
-            scrollTrigger: {
-              trigger: ".hero",
-              start: "top top",
-              end: "bottom top",
-              scrub: 1.2
-            }
-          });
-
-          window.gsap.to(".hero__orb--two", {
-            yPercent: -18,
-            xPercent: 8,
-            scrollTrigger: {
-              trigger: ".hero",
-              start: "top top",
-              end: "bottom top",
-              scrub: 1.2
-            }
-          });
-
-          window.gsap.to(".hero__grid", {
-            yPercent: 18,
-            scrollTrigger: {
-              trigger: ".hero",
-              start: "top top",
-              end: "bottom top",
-              scrub: 1.1
-            }
-          });
-
-          window.gsap.to(".hero-copy", {
-            y: 56,
-            scrollTrigger: {
-              trigger: ".hero",
-              start: "top top",
-              end: "bottom top",
-              scrub: 1.1
-            }
-          });
-
-          window.gsap.to(".hero-portrait", {
-            y: -64,
-            scrollTrigger: {
-              trigger: ".hero",
-              start: "top top",
-              end: "bottom top",
-              scrub: 1.1
-            }
-          });
-
-          const matchMedia = window.gsap.matchMedia();
-          matchMedia.add("(min-width: 901px)", function () {
-            const showcaseWrap = document.querySelector(".showcase-wrap");
-            const showcaseFrame = document.querySelector(".showcase-frame");
-            const showcaseSticky = document.querySelector(".showcase-sticky");
-            const showcaseTrack = document.querySelector(".showcase-track");
-            const showcaseCards = window.gsap.utils.toArray(".showcase-card");
-
-            if (!showcaseWrap || !showcaseFrame || !showcaseSticky || !showcaseTrack || !showcaseCards.length) {
-              return;
-            }
-
-            const getDistance = function () {
-              return Math.max(0, showcaseTrack.scrollWidth - showcaseFrame.clientWidth);
-            };
-
-            window.gsap.to(showcaseTrack, {
-              x: function () {
-                return -getDistance();
-              },
-              ease: "none",
-              scrollTrigger: {
-                trigger: showcaseWrap,
-                start: "top top+=110",
-                end: function () {
-                  return "+=" + (getDistance() + window.innerHeight * 0.45);
-                },
-                pin: showcaseSticky,
-                scrub: 1,
-                anticipatePin: 1,
-                invalidateOnRefresh: true
-              }
-            });
-
-            showcaseCards.forEach(function (card, index) {
-              window.gsap.fromTo(
-                card,
-                {
-                  y: index % 2 === 0 ? 56 : -56,
-                  rotate: index % 2 === 0 ? -1.8 : 1.8
-                },
-                {
-                  y: 0,
-                  rotate: 0,
-                  ease: "none",
-                  scrollTrigger: {
-                    trigger: showcaseWrap,
-                    start: "top top+=110",
-                    end: function () {
-                      return "+=" + (getDistance() + window.innerHeight * 0.45);
-                    },
-                    scrub: 1.1
-                  }
-                }
-              );
-            });
-          });
-
           window.gsap.utils.toArray(".timeline-card").forEach(function (card, index) {
             window.gsap.from(card, {
               opacity: 0,
@@ -2556,10 +2684,11 @@
 
     <script>
     /* ============================================================
-       PARTICLE CHAT SYSTEM
+       CHAT SYSTEM
        ============================================================ */
     (function () {
       const CHAT_PROXY_URL = 'https://script.google.com/macros/s/AKfycbwr4EgtP2CK2_8FS30VEpoLoTw9LfUuyTnEm04Xu-PQSzedcCmuypyyKnerv0uo61If/exec';
+      const mobileChatQuery = window.matchMedia("(max-width: 900px), (pointer: coarse)");
 
       const SECTIONS = {
         home: {
@@ -2584,116 +2713,10 @@
         }
       };
 
-      /* ── State ── */
       let activeSection = 'home';
       let chatOpen = false;
-      let particles = [];
-      let animFrame = null;
       let chatSessionId = null;
-      let hintEl = null;
-
-      /* ── Canvas ── */
-      const canvas = document.createElement('canvas');
-      canvas.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:49;';
-      document.body.appendChild(canvas);
-      const ctx = canvas.getContext('2d');
-
-      function resizeCanvas() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-      }
-      resizeCanvas();
-      window.addEventListener('resize', () => { resizeCanvas(); rebuildParticles(); });
-
-      /* ── Particle ── */
-      class Particle {
-        constructor(x, y) {
-          this.x = x; this.y = y;
-          this.vx = (Math.random() - 0.5) * 0.6;
-          this.vy = (Math.random() - 0.5) * 0.6;
-          this.size = Math.random() * 2 + 0.5;
-          this.opacity = Math.random() * 0.5 + 0.15;
-          this.opacityDir = (Math.random() - 0.5) * 0.008;
-          this.color = Math.random() > 0.45 ? '114,245,164' : '115,223,247';
-        }
-
-        update(rect) {
-          if (!rect) return;
-          const nearest = nearestPerimeterPoint(this.x, this.y, rect);
-          const dx = nearest.x - this.x;
-          const dy = nearest.y - this.y;
-          const dist = Math.hypot(dx, dy);
-          if (dist > 4) { this.vx += dx * 0.004; this.vy += dy * 0.004; }
-          this.vx += (Math.random() - 0.5) * 0.15;
-          this.vy += (Math.random() - 0.5) * 0.15;
-          this.vx *= 0.94; this.vy *= 0.94;
-          this.x += this.vx; this.y += this.vy;
-          this.opacity += this.opacityDir;
-          if (this.opacity > 0.75 || this.opacity < 0.08) this.opacityDir *= -1;
-        }
-
-        draw() {
-          ctx.beginPath();
-          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(${this.color},${this.opacity})`;
-          ctx.fill();
-          ctx.beginPath();
-          ctx.arc(this.x, this.y, this.size * 3, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(${this.color},${this.opacity * 0.12})`;
-          ctx.fill();
-        }
-      }
-
-      function nearestPerimeterPoint(px, py, rect) {
-        const m = 6;
-        const t = rect.top + m, b = rect.bottom - m;
-        const l = rect.left + m, r = rect.right - m;
-        const dT = Math.abs(py - t), dB = Math.abs(py - b);
-        const dL = Math.abs(px - l), dR = Math.abs(px - r);
-        const min = Math.min(dT, dB, dL, dR);
-        let x = Math.max(l, Math.min(r, px));
-        let y = Math.max(t, Math.min(b, py));
-        if (min === dT) y = t;
-        else if (min === dB) y = b;
-        else if (min === dL) x = l;
-        else x = r;
-        return { x, y };
-      }
-
-      function randomPerimeterPoint(rect) {
-        const m = 6;
-        const w = rect.width - m * 2, h = rect.height - m * 2;
-        const perim = 2 * (w + h);
-        const t = Math.random() * perim;
-        if (t < w)           return { x: rect.left + m + t,         y: rect.top + m };
-        if (t < w + h)       return { x: rect.right - m,            y: rect.top + m + (t - w) };
-        if (t < 2 * w + h)   return { x: rect.right - m - (t-w-h), y: rect.bottom - m };
-                             return { x: rect.left + m,             y: rect.bottom - m - (t - 2*w - h) };
-      }
-
-      function getRect() {
-        const el = document.getElementById(activeSection);
-        return el ? el.getBoundingClientRect() : null;
-      }
-
-      function rebuildParticles() {
-        particles = [];
-        const rect = getRect();
-        if (!rect) return;
-        for (let i = 0; i < 55; i++) {
-          const { x, y } = randomPerimeterPoint(rect);
-          particles.push(new Particle(x, y));
-        }
-      }
-
-      /* ── Animation loop ── */
-      function animate() {
-        animFrame = requestAnimationFrame(animate);
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        if (chatOpen) return;
-        const rect = getRect();
-        particles.forEach(p => { p.update(rect); p.draw(); });
-      }
+      let chatTrigger = null;
 
       /* ── Section observer ── */
       const observer = new IntersectionObserver(entries => {
@@ -2702,49 +2725,16 @@
         if (best && best !== activeSection) {
           activeSection = best;
           chatSessionId = null;
-          rebuildParticles();
-          showHint();
         }
       }, { threshold: [0.2, 0.5, 0.8] });
 
       document.querySelectorAll('section[id]').forEach(s => observer.observe(s));
 
-      /* ── Edge click detection ── */
-      document.addEventListener('click', e => {
-        if (chatOpen) return;
-        const rect = getRect();
-        if (!rect) return;
-        const { clientX: x, clientY: y } = e;
-        const zone = 36;
-        const onEdge =
-          (Math.abs(y - rect.top)    < zone && x > rect.left && x < rect.right) ||
-          (Math.abs(y - rect.bottom) < zone && x > rect.left && x < rect.right) ||
-          (Math.abs(x - rect.left)   < zone && y > rect.top  && y < rect.bottom) ||
-          (Math.abs(x - rect.right)  < zone && y > rect.top  && y < rect.bottom);
-        if (onEdge) openChat();
-      });
-
-      /* ── Hint label ── */
-      function showHint() {
-        if (hintEl) hintEl.remove();
-        const rect = getRect();
-        if (!rect) return;
-        hintEl = document.createElement('div');
-        hintEl.className = 'pc-hint';
-        hintEl.textContent = '[ tap the edge to chat ]';
-        hintEl.style.left = `${rect.left + rect.width / 2}px`;
-        hintEl.style.top  = `${rect.bottom - 28}px`;
-        hintEl.style.transform = 'translateX(-50%)';
-        document.body.appendChild(hintEl);
-        setTimeout(() => { if (hintEl) { hintEl.style.transition = 'opacity 0.6s'; hintEl.style.opacity = '0'; setTimeout(() => hintEl && hintEl.remove(), 700); } }, 3500);
-      }
-
       /* ── Chat open/close ── */
       function openChat() {
+        if (chatOpen) return;
         chatOpen = true;
-        if (hintEl) hintEl.remove();
-        particles.forEach(p => { p.vx = (Math.random() - 0.5) * 10; p.vy = (Math.random() - 0.5) * 10; });
-        setTimeout(() => { particles = []; }, 500);
+        updateChatTrigger();
         buildChatUI();
       }
 
@@ -2753,7 +2743,28 @@
         const panel = document.getElementById('particle-chat');
         if (panel) { panel.classList.remove('pc-open'); setTimeout(() => panel.remove(), 300); }
         chatSessionId = null;
-        setTimeout(rebuildParticles, 350);
+        updateChatTrigger();
+      }
+
+      function ensureChatTrigger() {
+        if (chatTrigger) return chatTrigger;
+        chatTrigger = document.createElement('button');
+        chatTrigger.type = 'button';
+        chatTrigger.className = 'pc-chat-trigger';
+        chatTrigger.setAttribute('aria-label', 'Open chat with Francesco');
+        chatTrigger.innerHTML = '<i class="ri-chat-1-line" aria-hidden="true"></i><span>Chat</span>';
+        chatTrigger.addEventListener('click', openChat);
+        document.body.appendChild(chatTrigger);
+        return chatTrigger;
+      }
+
+      function updateChatTrigger() {
+        const trigger = ensureChatTrigger();
+        trigger.classList.toggle('is-hidden', chatOpen);
+      }
+
+      function syncChatMode() {
+        document.body.classList.toggle('is-mobile-chat', mobileChatQuery.matches);
       }
 
       function createChatId(prefix = 'pc') {
@@ -2856,9 +2867,10 @@
       }
 
       /* ── Init ── */
-      rebuildParticles();
-      animate();
-      setTimeout(showHint, 1200);
+      syncChatMode();
+      window.addEventListener('resize', syncChatMode);
+      ensureChatTrigger();
+      updateChatTrigger();
     })();
     </script>
   </body>
