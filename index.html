@@ -2717,6 +2717,8 @@
       let chatOpen = false;
       let chatSessionId = null;
       let chatTrigger = null;
+      let proxyWarmupPromise = null;
+      let isSending = false;
 
       /* ── Section observer ── */
       const observer = new IntersectionObserver(entries => {
@@ -2781,6 +2783,100 @@
         return /[àèéìòù]|\b(ciao|come|grazie|progetto|contatto|lavoro)\b/i.test(text) ? 'it' : 'en';
       }
 
+      function delay(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+      }
+
+      function isRetryableChatError(error) {
+        const message = String(error && error.message ? error.message : error).toLowerCase();
+        return (
+          message.includes('high demand') ||
+          message.includes('temporar') ||
+          message.includes('try again later') ||
+          message.includes('failed to fetch') ||
+          message.includes('networkerror') ||
+          message.includes('load failed') ||
+          message.includes('aborted') ||
+          message.includes('timeout')
+        );
+      }
+
+      function getFriendlyChatError(error) {
+        const message = String(error && error.message ? error.message : error).toLowerCase();
+
+        if (
+          message.includes('high demand') ||
+          message.includes('temporar') ||
+          message.includes('try again later')
+        ) {
+          return 'The assistant is temporarily busy. Please try again in a few seconds.';
+        }
+
+        if (
+          message.includes('failed to fetch') ||
+          message.includes('networkerror') ||
+          message.includes('load failed') ||
+          message.includes('aborted') ||
+          message.includes('timeout')
+        ) {
+          return 'The chat service is waking up. Please try again in a few seconds.';
+        }
+
+        return 'The assistant could not reply right now. Please try again in a moment.';
+      }
+
+      async function warmChatProxy() {
+        if (proxyWarmupPromise) return proxyWarmupPromise;
+
+        proxyWarmupPromise = fetch(CHAT_PROXY_URL, {
+          method: 'GET',
+          cache: 'no-store'
+        })
+          .then(response => response.json().catch(() => null))
+          .catch(() => {
+            proxyWarmupPromise = null;
+            return null;
+          });
+
+        return proxyWarmupPromise;
+      }
+
+      async function requestChatReply(requestUrl) {
+        let lastError = null;
+
+        for (let attempt = 0; attempt < 3; attempt += 1) {
+          const controller = new AbortController();
+          const timeout = window.setTimeout(() => controller.abort(), 18000);
+
+          try {
+            const res = await fetch(requestUrl.toString(), {
+              cache: 'no-store',
+              signal: controller.signal
+            });
+            const data = await res.json();
+
+            if (!res.ok || !data.ok) {
+              throw new Error(data && data.error ? data.error : 'Chat proxy error');
+            }
+
+            return data.reply || 'Sorry, I can\'t respond right now.';
+          } catch (error) {
+            lastError = error;
+
+            if (attempt < 2 && isRetryableChatError(error)) {
+              await delay(900 * (attempt + 1));
+              continue;
+            }
+
+            throw error;
+          } finally {
+            window.clearTimeout(timeout);
+          }
+        }
+
+        throw lastError || new Error('Chat proxy error');
+      }
+
       /* ── Chat UI ── */
       function buildChatUI() {
         const existing = document.getElementById('particle-chat');
@@ -2820,10 +2916,13 @@
 
       /* ── Gemini call ── */
       async function sendMessage(text) {
+        if (isSending) return;
+
         const msgEl = document.getElementById('pc-messages');
         if (!msgEl) return;
         msgEl.querySelector('.pc-suggestions')?.remove();
         appendMsg(msgEl, text, 'user');
+        isSending = true;
 
         const typing = document.createElement('div');
         typing.className = 'pc-msg pc-msg--ai pc-typing';
@@ -2842,15 +2941,15 @@
         requestUrl.searchParams.set('pageUrl', window.location.href);
 
         try {
-          const res = await fetch(requestUrl.toString());
-          const data = await res.json();
-          if (!res.ok || !data.ok) throw new Error(data.error || 'Chat proxy error');
-          const reply = data.reply || 'Sorry, I can\'t respond right now.';
+          await warmChatProxy();
+          const reply = await requestChatReply(requestUrl);
           typing.remove();
           appendMsg(msgEl, reply, 'ai');
-        } catch {
+        } catch (error) {
           typing.remove();
-          appendMsg(msgEl, 'Connection error. Please try again in a moment.', 'ai');
+          appendMsg(msgEl, getFriendlyChatError(error), 'ai');
+        } finally {
+          isSending = false;
         }
         msgEl.scrollTop = msgEl.scrollHeight;
       }
@@ -2871,6 +2970,7 @@
       window.addEventListener('resize', syncChatMode);
       ensureChatTrigger();
       updateChatTrigger();
+      warmChatProxy();
     })();
     </script>
   </body>
