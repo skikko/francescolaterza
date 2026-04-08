@@ -2787,8 +2787,8 @@
         chatTrigger = document.createElement('button');
         chatTrigger.type = 'button';
         chatTrigger.className = 'pc-chat-trigger';
-        chatTrigger.setAttribute('aria-label', 'Open chat with Francesco');
-        chatTrigger.innerHTML = '<i class="ri-chat-1-line" aria-hidden="true"></i><span>Chat</span>';
+        chatTrigger.setAttribute('aria-label', 'Open AI Terminal');
+        chatTrigger.innerHTML = '<i class="ri-chat-1-line" aria-hidden="true"></i><span>AI Terminal</span>';
         chatTrigger.addEventListener('click', openChat);
         document.body.appendChild(chatTrigger);
         return chatTrigger;
@@ -2946,7 +2946,7 @@
         panel.innerHTML = `
           <div class="pc-bar">
             <div class="pc-dots"><span></span><span></span><span></span></div>
-            <span class="pc-label">Ask Francesco</span>
+            <span class="pc-label">AI Terminal</span>
             <button class="pc-close" aria-label="Close">×</button>
           </div>
           <div class="pc-messages" id="pc-messages">
