@@ -2454,6 +2454,9 @@
             <p><span class="prompt">&gt; get_credits()</span></p>
             <p class="dim">© <span id="year">2026</span> Francesco Laterza — All rights reserved.</p>
             <p class="dim">No AI was harmed. Powered by caffeine, curiosity &amp; cutting-edge tech.</p>
+            <p><span class="prompt">&gt; privacy_notice()</span></p>
+            <p class="dim">This site uses a first-party, cookie-free visit counter for aggregated audience measurement only.</p>
+            <p class="dim">No ad IDs, no profiling, no personal tracking. Summary stats are stored in Google Sheets.</p>
             <p><span class="prompt">&gt;</span> <span class="footer__cursor" aria-hidden="true"></span></p>
           </div>
         </article>
@@ -2711,7 +2714,7 @@
        CHAT SYSTEM
        ============================================================ */
     (function () {
-      const CHAT_PROXY_URL = 'https://script.google.com/macros/s/AKfycbyduOGBf67iJC0TIrqOITaa5vQxIcNhvHwydUFPYdHJ4I12n1R-R-i_MdsLPpTiIikX/exec';
+      const CHAT_PROXY_URL = 'https://script.google.com/macros/s/AKfycbxYWL2I_qAjHc8vxJh0zHV0qgsM5mUnswNwTtUh7Ns-UgXh_-ZPF2JG7Ixly63SoTDf/exec';
       const mobileChatQuery = window.matchMedia("(max-width: 900px), (pointer: coarse)");
 
       const SECTIONS = {
@@ -2750,6 +2753,7 @@
       let conversationHistory = [];
       let proxyWarmupPromise = null;
       let isSending = false;
+      let hasTrackedPageView = false;
 
       /* ── Section observer ── */
       const observer = new IntersectionObserver(entries => {
@@ -2819,6 +2823,110 @@
 
       function delay(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
+      }
+
+      function shouldTrackPageView() {
+        const protocol = window.location.protocol;
+        const hostname = String(window.location.hostname || '').toLowerCase();
+
+        if (protocol !== 'https:' && protocol !== 'http:') {
+          return false;
+        }
+
+        if (
+          hostname === 'localhost' ||
+          hostname === '127.0.0.1' ||
+          hostname === '0.0.0.0' ||
+          hostname.endsWith('.local')
+        ) {
+          return false;
+        }
+
+        return true;
+      }
+
+      function getAnalyticsLanguage() {
+        const language = String(document.documentElement.lang || navigator.language || 'en')
+          .trim()
+          .toLowerCase();
+
+        if (language.startsWith('it')) return 'it';
+        if (language.startsWith('en')) return 'en';
+        return 'other';
+      }
+
+      function getDeviceType() {
+        return window.matchMedia("(max-width: 900px), (pointer: coarse)").matches ? 'mobile' : 'desktop';
+      }
+
+      function getReferrerBucket() {
+        const referrer = document.referrer;
+
+        if (!referrer) {
+          return 'direct';
+        }
+
+        try {
+          const refUrl = new URL(referrer);
+          const refHost = String(refUrl.hostname || '').toLowerCase();
+          const currentHost = String(window.location.hostname || '').toLowerCase();
+
+          if (!refHost || refHost === currentHost) {
+            return 'direct';
+          }
+
+          if (
+            ['google.', 'bing.', 'duckduckgo.', 'search.yahoo.', 'ecosia.'].some(token => refHost.includes(token))
+          ) {
+            return 'search';
+          }
+
+          if (
+            ['linkedin.', 'instagram.', 'facebook.', 'x.com', 'twitter.', 't.co'].some(token => refHost.includes(token))
+          ) {
+            return 'social';
+          }
+        } catch (error) {
+          return 'other';
+        }
+
+        return 'other';
+      }
+
+      function trackPageView() {
+        if (hasTrackedPageView || !shouldTrackPageView()) {
+          return;
+        }
+
+        hasTrackedPageView = true;
+
+        const payload = {
+          type: 'pageview',
+          host: window.location.host,
+          path: window.location.pathname || '/',
+          language: getAnalyticsLanguage(),
+          deviceType: getDeviceType(),
+          referrerBucket: getReferrerBucket()
+        };
+
+        const body = JSON.stringify(payload);
+
+        if (navigator.sendBeacon) {
+          const blob = new Blob([body], { type: 'text/plain;charset=UTF-8' });
+          if (navigator.sendBeacon(CHAT_PROXY_URL, blob)) {
+            return;
+          }
+        }
+
+        fetch(CHAT_PROXY_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'text/plain;charset=utf-8'
+          },
+          body: body,
+          cache: 'no-store',
+          keepalive: true
+        }).catch(() => {});
       }
 
       function isRetryableChatError(error) {
@@ -3059,6 +3167,7 @@
       window.addEventListener('resize', syncChatMode);
       ensureChatTrigger();
       updateChatTrigger();
+      trackPageView();
       warmChatProxy();
     })();
     </script>
