@@ -1,3175 +1,684 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Francesco Laterza | Creative Technologist &amp; CTO</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#101310" />
     <meta
       name="description"
-      content="Creative technologist, CTO and immersive education leader building impactful products, learning experiences and future-ready systems."
-    >
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      content="Francesco Laterza. Creative technologist and CTO in Rome, connecting digital products, AI, immersive experiences and human potential."
+    />
+    <title>Francesco Laterza | Curiosity, engineered.</title>
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
     <link
-      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=Orbitron:wght@500;700;800&amp;family=Sora:wght@300;400;500;600;700;800&amp;display=swap"
-      rel="stylesheet"
-    >
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css"
-      rel="stylesheet"
-    >
-    <style>
-      :root {
-        --bg: #030806;
-        --bg-soft: #07110d;
-        --panel: rgba(9, 19, 14, 0.9);
-        --panel-strong: rgba(5, 12, 8, 0.92);
-        --text: #f4fff8;
-        --muted: #9db4a3;
-        --acid: #72f5a4;
-        --laser: #16ff8a;
-        --cyan: #73dff7;
-        --amber: #ffc76b;
-        --rose: #ff8db1;
-        --line: rgba(114, 245, 164, 0.14);
-        --line-strong: rgba(114, 245, 164, 0.28);
-        --shadow: 0 32px 90px rgba(1, 7, 4, 0.55);
-        --shadow-soft: 0 18px 44px rgba(3, 12, 8, 0.38);
-        --radius: 28px;
-        --max-width: 1200px;
-        --scroll: 0%;
-      }
-
-      * {
-        box-sizing: border-box;
-      }
-
-      html {
-        scroll-behavior: smooth;
-      }
-
-      body {
-        margin: 0;
-        min-height: 100vh;
-        overflow-x: hidden;
-        font-family: "Sora", sans-serif;
-        line-height: 1.5;
-        color: var(--text);
-        background:
-          radial-gradient(circle at 18% 18%, rgba(114, 245, 164, 0.18), transparent 32%),
-          radial-gradient(circle at 82% 12%, rgba(115, 223, 247, 0.15), transparent 24%),
-          linear-gradient(180deg, #020604 0%, #040b08 56%, #030705 100%);
-      }
-
-      body::before,
-      body::after {
-        content: "";
-        position: fixed;
-        inset: 0;
-        pointer-events: none;
-      }
-
-      body::before {
-        z-index: -2;
-        opacity: 0.22;
-        background:
-          linear-gradient(rgba(114, 245, 164, 0.08) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(114, 245, 164, 0.08) 1px, transparent 1px);
-        background-size: 32px 32px;
-        mask-image: linear-gradient(
-          180deg,
-          rgba(0, 0, 0, 0.55),
-          transparent 16%,
-          transparent 86%,
-          rgba(0, 0, 0, 0.72)
-        );
-      }
-
-      body::after {
-        z-index: -1;
-        background:
-          linear-gradient(180deg, rgba(0, 0, 0, 0.12), transparent 14%, transparent 84%, rgba(0, 0, 0, 0.42)),
-          radial-gradient(circle at center, transparent 52%, rgba(0, 0, 0, 0.66));
-      }
-
-      a {
-        color: inherit;
-        text-decoration: none;
-      }
-
-      img {
-        display: block;
-        max-width: 100%;
-      }
-
-      button {
-        font: inherit;
-        color: inherit;
-      }
-
-      ::selection {
-        color: var(--text);
-        background: rgba(114, 245, 164, 0.24);
-      }
-
-      .mono {
-        font-family: "IBM Plex Mono", monospace;
-      }
-
-      .display {
-        font-family: "Orbitron", sans-serif;
-      }
-
-      .section-shell {
-        width: min(var(--max-width), calc(100% - 2.5rem));
-        margin-inline: auto;
-      }
-
-      .eyebrow {
-        margin: 0;
-        color: var(--muted);
-        font-size: 0.82rem;
-        letter-spacing: 0.22em;
-        text-transform: uppercase;
-      }
-
-      .section {
-        position: relative;
-        padding: clamp(5rem, 10vw, 8.5rem) 0;
-        scroll-margin-top: 7.5rem;
-      }
-
-      .section-heading {
-        max-width: 52rem;
-        margin-bottom: clamp(2rem, 5vw, 4rem);
-      }
-
-      .section-heading--center {
-        margin-inline: auto;
-        text-align: center;
-      }
-
-      .section-title {
-        margin: 0.85rem 0 0;
-        font-size: clamp(2.3rem, 5vw, 4.25rem);
-        line-height: 0.95;
-        letter-spacing: -0.06em;
-        text-transform: uppercase;
-      }
-
-      .section-copy {
-        margin: 1.2rem 0 0;
-        max-width: 44rem;
-        color: var(--muted);
-        font-size: 1.04rem;
-      }
-
-      .glass-panel {
-        border: 1px solid var(--line);
-        border-radius: 32px;
-        background: linear-gradient(180deg, rgba(9, 19, 14, 0.92), rgba(4, 10, 7, 0.84));
-        box-shadow: var(--shadow);
-        backdrop-filter: blur(18px);
-      }
-
-      .top-progress {
-        position: fixed;
-        inset: 0 0 auto;
-        z-index: 140;
-        height: 4px;
-        background: rgba(114, 245, 164, 0.08);
-      }
-
-      .top-progress__bar {
-        height: 100%;
-        width: var(--scroll);
-        background: linear-gradient(90deg, var(--acid), var(--cyan), #ffffff);
-        box-shadow: 0 0 18px rgba(114, 245, 164, 0.7);
-      }
-
-      .pointer-glow {
-        position: fixed;
-        z-index: 0;
-        left: 50%;
-        top: 50%;
-        width: 26rem;
-        height: 26rem;
-        border-radius: 50%;
-        pointer-events: none;
-        opacity: 0;
-        transform: translate(-50%, -50%);
-        background: radial-gradient(circle, rgba(114, 245, 164, 0.18), transparent 68%);
-        filter: blur(18px);
-        mix-blend-mode: screen;
-        transition: opacity 0.3s ease;
-      }
-
-      body[data-touch="true"] .pointer-glow {
-        display: none;
-      }
-
-      .site-header {
-        position: fixed;
-        inset: 1rem 0 auto;
-        z-index: 130;
-      }
-
-      .header-shell {
-        position: relative;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 1rem;
-        width: min(calc(var(--max-width) + 1rem), calc(100% - 1rem));
-        margin-inline: auto;
-        padding: 0.95rem 1.1rem;
-        border: 1px solid var(--line-strong);
-        border-radius: 24px;
-        background: rgba(7, 16, 11, 0.72);
-        box-shadow: var(--shadow-soft);
-        backdrop-filter: blur(18px);
-      }
-
-      .brand {
-        display: flex;
-        flex-direction: column;
-        gap: 0.25rem;
-        flex: 1;
-        min-width: 0;
-      }
-
-      .brand__kicker {
-        margin: 0;
-        color: var(--muted);
-        font-size: 0.7rem;
-        letter-spacing: 0.24em;
-        text-transform: uppercase;
-      }
-
-      .brand__name {
-        margin: 0;
-        font-size: clamp(1.02rem, 1.8vw, 1.34rem);
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-
-      .site-nav {
-        display: flex;
-        align-items: center;
-        gap: 0.45rem;
-      }
-
-      .site-nav a {
-        padding: 0.72rem 1rem;
-        border: 1px solid transparent;
-        border-radius: 999px;
-        color: var(--muted);
-        font-size: 0.94rem;
-        transition:
-          border-color 0.25s ease,
-          background 0.25s ease,
-          color 0.25s ease,
-          transform 0.25s ease;
-      }
-
-      .site-nav a:hover,
-      .site-nav a:focus-visible,
-      .site-nav a.is-active {
-        color: var(--text);
-        border-color: var(--line-strong);
-        background: rgba(114, 245, 164, 0.08);
-        transform: translateY(-1px);
-      }
-
-      .nav-toggle {
-        display: none;
-        place-items: center;
-        width: 48px;
-        height: 48px;
-        border: 1px solid var(--line-strong);
-        border-radius: 16px;
-        background: rgba(114, 245, 164, 0.08);
-        cursor: pointer;
-      }
-
-      .nav-toggle i {
-        font-size: 1.3rem;
-      }
-
-      .hero {
-        position: relative;
-        display: flex;
-        align-items: center;
-        min-height: clamp(720px, 88svh, 900px);
-        padding-top: calc(7rem + clamp(2rem, 5vw, 4rem));
-        scroll-margin-top: 7.5rem;
-        overflow: clip;
-      }
-
-      .hero__backdrop {
-        position: absolute;
-        inset: 0;
-        overflow: hidden;
-      }
-
-      .hero__noise {
-        position: absolute;
-        inset: 0;
-        opacity: 0.22;
-        background-image: radial-gradient(rgba(255, 255, 255, 0.12) 0.7px, transparent 0.7px);
-        background-size: 14px 14px;
-        mask-image: radial-gradient(circle at center, black, transparent 84%);
-      }
-
-      .hero__grid {
-        position: absolute;
-        inset: auto -6% -14%;
-        height: 70%;
-        opacity: 0.28;
-        background:
-          linear-gradient(rgba(114, 245, 164, 0.12) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(114, 245, 164, 0.12) 1px, transparent 1px);
-        background-size: 64px 64px;
-        transform: perspective(1000px) rotateX(82deg) scale(1.5);
-        transform-origin: center bottom;
-      }
-
-      .hero__orb {
-        position: absolute;
-        border-radius: 50%;
-        filter: blur(78px);
-        mix-blend-mode: screen;
-      }
-
-      .hero__orb--one {
-        top: -12rem;
-        right: -8rem;
-        width: 44rem;
-        height: 44rem;
-        background: radial-gradient(circle, rgba(114, 245, 164, 0.45), transparent 68%);
-      }
-
-      .hero__orb--two {
-        left: -10rem;
-        bottom: -12rem;
-        width: 32rem;
-        height: 32rem;
-        background: radial-gradient(circle, rgba(115, 223, 247, 0.26), transparent 70%);
-      }
-
-      .hero__inner {
-        position: relative;
-        z-index: 1;
-        display: grid;
-        grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.92fr);
-        align-items: center;
-        gap: clamp(2rem, 4.5vw, 5rem);
-        padding-bottom: 2rem;
-      }
-
-      .hero-copy {
-        position: relative;
-        z-index: 1;
-        max-width: 38rem;
-      }
-
-      .hero-title {
-        display: grid;
-        gap: 0.28rem;
-        margin: 1rem 0 0.85rem;
-      }
-
-      .hero-title__line {
-        display: block;
-        overflow: hidden;
-      }
-
-      .hero-title__text {
-        display: block;
-        font-size: clamp(2.55rem, 5.9vw, 5.1rem);
-        line-height: 0.94;
-        letter-spacing: -0.06em;
-        text-transform: uppercase;
-      }
-
-      .hero-title__text.accent {
-        color: transparent;
-        background: linear-gradient(90deg, var(--acid), #ffffff 52%, var(--cyan));
-        -webkit-background-clip: text;
-        background-clip: text;
-        text-shadow: 0 0 30px rgba(114, 245, 164, 0.16);
-      }
-
-      .hero-title__text.signal {
-        color: var(--acid);
-        text-shadow: 0 0 26px rgba(114, 245, 164, 0.14);
-      }
-
-      .hero-title__caption {
-        margin: 0 0 1.35rem;
-        color: #d9f6e5;
-        font-size: clamp(1rem, 1.55vw, 1.18rem);
-        letter-spacing: 0.22em;
-        text-transform: uppercase;
-      }
-
-      .hero-copy__lead {
-        margin: 0;
-        max-width: 34rem;
-        color: #d8f8e2;
-        font-size: clamp(1rem, 1.45vw, 1.14rem);
-      }
-
-      .role-rotator {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.75rem;
-        margin-top: 1.45rem;
-        padding: 0.95rem 1.2rem;
-        border: 1px solid var(--line);
-        border-radius: 999px;
-        background: rgba(8, 15, 11, 0.76);
-        color: var(--muted);
-        font-size: 0.78rem;
-        letter-spacing: 0.18em;
-        text-transform: uppercase;
-      }
-
-      #role-rotator {
-        color: var(--text);
-        font-weight: 600;
-        letter-spacing: 0.04em;
-      }
-
-      .hero-actions {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 1rem;
-        margin-top: 1.9rem;
-      }
-
-      .hero-contacts {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.75rem;
-        margin-top: 1rem;
-        max-width: 40rem;
-      }
-
-      .hero-contact {
-        display: grid;
-        flex: 1 1 12rem;
-        gap: 0.28rem;
-        min-height: 0;
-        padding: 0.88rem 1rem;
-        border: 1px solid rgba(114, 245, 164, 0.14);
-        border-radius: 18px;
-        background: linear-gradient(180deg, rgba(10, 19, 14, 0.86), rgba(5, 12, 8, 0.8));
-        box-shadow: var(--shadow-soft);
-        transition:
-          transform 0.28s ease,
-          border-color 0.28s ease,
-          background 0.28s ease;
-      }
-
-      .hero-contact:hover,
-      .hero-contact:focus-visible {
-        transform: translateY(-4px);
-        border-color: rgba(114, 245, 164, 0.3);
-        background: rgba(114, 245, 164, 0.08);
-      }
-
-      .hero-contact small {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.45rem;
-        color: var(--muted);
-        font-size: 0.68rem;
-        letter-spacing: 0.14em;
-        text-transform: uppercase;
-      }
-
-      .hero-contact strong {
-        font-size: 0.94rem;
-        line-height: 1.3;
-        word-break: break-word;
-      }
-
-      .button {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 0.75rem;
-        min-height: 56px;
-        padding: 0.95rem 1.35rem;
-        border: 1px solid var(--line-strong);
-        border-radius: 999px;
-        font-weight: 600;
-        letter-spacing: 0.01em;
-        transition:
-          transform 0.28s ease,
-          border-color 0.28s ease,
-          background 0.28s ease,
-          box-shadow 0.28s ease,
-          color 0.28s ease;
-        will-change: transform;
-      }
-
-      .button:hover,
-      .button:focus-visible {
-        transform: translateY(-3px) scale(1.01);
-      }
-
-      .button--primary {
-        color: #031108;
-        background: linear-gradient(135deg, rgba(114, 245, 164, 0.94), rgba(22, 255, 138, 0.7));
-        box-shadow: 0 20px 44px rgba(22, 255, 138, 0.24);
-      }
-
-      .button--secondary {
-        background: rgba(8, 15, 11, 0.62);
-      }
-
-      .button--ghost {
-        background: rgba(8, 15, 11, 0.55);
-        color: var(--muted);
-      }
-
-      .hero-stats {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 0.85rem;
-        margin-top: 1.45rem;
-        max-width: 42rem;
-      }
-
-      .stat-card {
-        position: relative;
-        overflow: hidden;
-        padding: 1rem 1rem 1.05rem;
-        border: 1px solid rgba(114, 245, 164, 0.16);
-        border-radius: 24px;
-        background: linear-gradient(180deg, rgba(12, 24, 18, 0.88), rgba(4, 12, 8, 0.82));
-        box-shadow: var(--shadow-soft);
-      }
-
-      .stat-card::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(135deg, rgba(114, 245, 164, 0.08), transparent 65%);
-      }
-
-      .stat-card__value {
-        position: relative;
-        display: block;
-        font-size: clamp(1.9rem, 3vw, 2.5rem);
-        font-weight: 700;
-      }
-
-      .stat-card__label {
-        position: relative;
-        margin-top: 0.4rem;
-        color: var(--muted);
-        font-size: 0.84rem;
-      }
-
-      .hero-portrait {
-        position: relative;
-        z-index: 1;
-      }
-
-      .portrait-shell {
-        position: relative;
-        min-height: 520px;
-        padding: 1.1rem;
-        border: 1px solid rgba(114, 245, 164, 0.18);
-        border-radius: 36px;
-        background: linear-gradient(180deg, rgba(8, 16, 12, 0.92), rgba(5, 11, 8, 0.7));
-        box-shadow: var(--shadow);
-        overflow: hidden;
-        isolation: isolate;
-      }
-
-      .portrait-shell::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background:
-          radial-gradient(circle at top, rgba(114, 245, 164, 0.18), transparent 46%),
-          linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent 34%);
-      }
-
-      .portrait-shell::after {
-        content: "";
-        position: absolute;
-        inset: 14px;
-        border: 1px solid rgba(115, 223, 247, 0.12);
-        border-radius: 28px;
-      }
-
-      .portrait-ring {
-        position: absolute;
-        inset: 11%;
-        border: 1px solid rgba(114, 245, 164, 0.18);
-        border-radius: 50%;
-        animation: spin 24s linear infinite;
-      }
-
-      .portrait-ring--two {
-        inset: 21%;
-        border-style: dashed;
-        animation-duration: 40s;
-        animation-direction: reverse;
-      }
-
-      .portrait-badge {
-        position: absolute;
-        top: 1.5rem;
-        left: 1.5rem;
-        z-index: 2;
-        padding: 0.72rem 0.92rem;
-        border: 1px solid rgba(114, 245, 164, 0.16);
-        border-radius: 999px;
-        background: rgba(8, 14, 11, 0.74);
-        color: var(--muted);
-        font-size: 0.74rem;
-        letter-spacing: 0.16em;
-        text-transform: uppercase;
-        backdrop-filter: blur(14px);
-      }
-
-      .portrait-photo {
-        position: absolute;
-        inset: 1.1rem;
-        border: 1px solid rgba(114, 245, 164, 0.16);
-        border-radius: 30px;
-        overflow: hidden;
-        z-index: 1;
-      }
-
-      .portrait-photo img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        object-position: center top;
-        filter: saturate(1.06) contrast(1.04);
-      }
-
-      .section--about {
-        padding-top: clamp(3.5rem, 6vw, 5rem);
-        background: linear-gradient(180deg, rgba(6, 13, 10, 0.38), rgba(5, 10, 8, 0.84));
-      }
-
-      .section--about::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 50%;
-        width: min(calc(var(--max-width) + 2rem), calc(100% - 2rem));
-        height: 1px;
-        background: linear-gradient(90deg, transparent, rgba(114, 245, 164, 0.28), transparent);
-        transform: translateX(-50%);
-      }
-
-      .about-grid {
-        display: grid;
-        grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
-        gap: 1.15rem;
-        align-items: start;
-      }
-
-      .terminal-panel {
-        padding: 1.4rem;
-      }
-
-      .terminal-bar {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 1rem;
-        margin-bottom: 1.15rem;
-        padding-bottom: 1rem;
-        border-bottom: 1px solid rgba(114, 245, 164, 0.12);
-      }
-
-      .terminal-dots {
-        display: flex;
-        gap: 0.45rem;
-      }
-
-      .terminal-dots span {
-        width: 12px;
-        height: 12px;
-        border-radius: 50%;
-      }
-
-      .terminal-dots span:nth-child(1) {
-        background: #ff6f7d;
-      }
-
-      .terminal-dots span:nth-child(2) {
-        background: #ffd166;
-      }
-
-      .terminal-dots span:nth-child(3) {
-        background: #72f5a4;
-      }
-
-      .terminal-label {
-        color: var(--muted);
-        font-size: 0.78rem;
-        letter-spacing: 0.2em;
-        text-transform: uppercase;
-      }
-
-      .terminal-screen {
-        padding: 1.25rem;
-        border: 1px solid rgba(114, 245, 164, 0.1);
-        border-radius: 24px;
-        background: rgba(4, 10, 7, 0.76);
-      }
-
-      .terminal-screen p {
-        margin: 0;
-      }
-
-      .terminal-screen p + p {
-        margin-top: 1rem;
-      }
-
-      .terminal-screen .prompt {
-        color: var(--acid);
-      }
-
-      .terminal-screen .dim {
-        color: var(--muted);
-      }
-
-      .about-card-grid {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 1rem;
-      }
-
-      .info-card {
-        position: relative;
-        min-height: 208px;
-        overflow: hidden;
-        padding: 1.35rem;
-        border: 1px solid rgba(114, 245, 164, 0.12);
-        border-radius: 26px;
-        background: rgba(8, 16, 12, 0.82);
-        box-shadow: var(--shadow-soft);
-      }
-
-      .info-card::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        opacity: 0;
-        background: linear-gradient(135deg, rgba(114, 245, 164, 0.08), transparent 62%);
-        transition: opacity 0.3s ease;
-      }
-
-      .info-card:hover::before {
-        opacity: 1;
-      }
-
-      .info-card__icon {
-        position: relative;
-        display: grid;
-        place-items: center;
-        width: 56px;
-        height: 56px;
-        border: 1px solid rgba(114, 245, 164, 0.15);
-        border-radius: 18px;
-        background: rgba(114, 245, 164, 0.08);
-        color: var(--acid);
-        font-size: 1.4rem;
-      }
-
-      .info-card__icon svg {
-        width: 28px;
-        height: 28px;
-        stroke: currentColor;
-        fill: none;
-        stroke-width: 1.8;
-        stroke-linecap: round;
-        stroke-linejoin: round;
-      }
-
-      .info-card h3 {
-        position: relative;
-        margin: 1rem 0 0;
-        font-size: 1.08rem;
-      }
-
-      .info-card p {
-        position: relative;
-        margin: 0.75rem 0 0;
-        color: var(--muted);
-      }
-
-      .info-card ul {
-        position: relative;
-        display: grid;
-        gap: 0.45rem;
-        margin: 1rem 0 0;
-        padding: 0;
-        list-style: none;
-      }
-
-      .info-card li {
-        position: relative;
-        padding-left: 1rem;
-        color: #dbf8e6;
-        font-size: 0.94rem;
-      }
-
-      .info-card li::before {
-        content: "";
-        position: absolute;
-        left: 0;
-        top: 0.65em;
-        width: 6px;
-        height: 6px;
-        border-radius: 50%;
-        background: var(--acid);
-      }
-
-      .section--skills {
-        overflow: clip;
-      }
-
-      .showcase-wrap {
-        position: relative;
-      }
-
-      .showcase-frame {
-        width: min(var(--max-width), calc(100% - 2.5rem));
-        margin-inline: auto;
-      }
-
-      .showcase-sticky {
-        position: relative;
-      }
-
-      .showcase-track {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 1.2rem;
-        width: 100%;
-        padding: 0;
-      }
-
-      .showcase-card {
-        position: relative;
-        min-height: 34rem;
-        overflow: hidden;
-        padding: 1.9rem;
-        border: 1px solid rgba(114, 245, 164, 0.14);
-        border-radius: 32px;
-        background: linear-gradient(180deg, rgba(10, 20, 15, 0.94), rgba(4, 10, 7, 0.86));
-        box-shadow: var(--shadow);
-        transform-style: preserve-3d;
-      }
-
-      .showcase-card::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background:
-          radial-gradient(circle at top right, rgba(114, 245, 164, 0.18), transparent 30%),
-          linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.24));
-      }
-
-      .showcase-card::after {
-        content: "";
-        position: absolute;
-        right: -3rem;
-        bottom: -3rem;
-        width: 14rem;
-        height: 14rem;
-        border-radius: 50%;
-        filter: blur(10px);
-        opacity: 0.55;
-        background: radial-gradient(circle, rgba(115, 223, 247, 0.24), transparent 70%);
-      }
-
-      .showcase-card--cyan::after {
-        background: radial-gradient(circle, rgba(115, 223, 247, 0.28), transparent 70%);
-      }
-
-      .showcase-card--amber::after {
-        background: radial-gradient(circle, rgba(255, 199, 107, 0.3), transparent 70%);
-      }
-
-      .showcase-card--rose::after {
-        background: radial-gradient(circle, rgba(255, 141, 177, 0.3), transparent 70%);
-      }
-
-      .showcase-card__index {
-        position: absolute;
-        top: 1rem;
-        right: 1.4rem;
-        font-size: 5.4rem;
-        line-height: 1;
-        opacity: 0.08;
-      }
-
-      .showcase-card__icon {
-        position: relative;
-        display: grid;
-        place-items: center;
-        width: 72px;
-        height: 72px;
-        border: 1px solid rgba(114, 245, 164, 0.16);
-        border-radius: 22px;
-        background: rgba(114, 245, 164, 0.08);
-        color: var(--acid);
-        font-size: 1.6rem;
-      }
-
-      .showcase-card h3 {
-        position: relative;
-        margin: 1.5rem 0 0;
-        max-width: 12ch;
-        font-size: 2rem;
-        line-height: 1.04;
-      }
-
-      .showcase-card p {
-        position: relative;
-        margin: 1rem 0 0;
-        max-width: 29rem;
-        color: var(--muted);
-      }
-
-      .showcase-metrics {
-        position: relative;
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 0.9rem;
-        margin-top: 1.85rem;
-      }
-
-      .metric {
-        padding: 1rem;
-        border: 1px solid rgba(114, 245, 164, 0.1);
-        border-radius: 18px;
-        background: rgba(4, 10, 7, 0.58);
-      }
-
-      .metric__label {
-        color: var(--muted);
-        font-size: 0.74rem;
-        letter-spacing: 0.16em;
-        text-transform: uppercase;
-      }
-
-      .metric__value {
-        display: block;
-        margin-top: 0.5rem;
-        font-size: 1.18rem;
-        font-weight: 600;
-      }
-
-      .showcase-tags {
-        position: relative;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.7rem;
-        margin-top: 1.9rem;
-      }
-
-      .showcase-tags span {
-        padding: 0.65rem 0.9rem;
-        border: 1px solid rgba(114, 245, 164, 0.12);
-        border-radius: 999px;
-        background: rgba(114, 245, 164, 0.08);
-        font-size: 0.84rem;
-      }
-
-      .showcase-card__line {
-        position: absolute;
-        left: 1.9rem;
-        right: 1.9rem;
-        bottom: 1.8rem;
-        height: 1px;
-        overflow: hidden;
-        background: linear-gradient(90deg, rgba(114, 245, 164, 0), rgba(114, 245, 164, 0.8), rgba(114, 245, 164, 0));
-      }
-
-      .showcase-card__line::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.9), transparent);
-        animation: lineSweep 2.8s linear infinite;
-      }
-
-      .section--experience {
-        background: linear-gradient(180deg, rgba(4, 10, 7, 0.86), rgba(6, 13, 10, 0.52));
-      }
-
-      .timeline {
-        position: relative;
-        display: grid;
-        gap: 1.25rem;
-      }
-
-      .timeline::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 50%;
-        width: 1px;
-        transform: translateX(-50%);
-        background: linear-gradient(180deg, rgba(114, 245, 164, 0.08), rgba(114, 245, 164, 0.84), rgba(114, 245, 164, 0.08));
-      }
-
-      .timeline-card {
-        position: relative;
-        width: calc(50% - 2rem);
-        padding: 1.6rem;
-        border: 1px solid rgba(114, 245, 164, 0.12);
-        border-radius: 28px;
-        background: rgba(8, 16, 12, 0.82);
-        box-shadow: var(--shadow-soft);
-      }
-
-      .timeline-card:nth-child(odd) {
-        margin-right: auto;
-      }
-
-      .timeline-card:nth-child(even) {
-        margin-left: auto;
-      }
-
-      .timeline-card::before {
-        content: "";
-        position: absolute;
-        top: 1.9rem;
-        width: 16px;
-        height: 16px;
-        border-radius: 50%;
-        background: var(--acid);
-        box-shadow: 0 0 0 10px rgba(114, 245, 164, 0.08), 0 0 26px rgba(114, 245, 164, 0.35);
-      }
-
-      .timeline-card:nth-child(odd)::before {
-        right: -2.5rem;
-      }
-
-      .timeline-card:nth-child(even)::before {
-        left: -2.5rem;
-      }
-
-      .timeline-card__period {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-        padding: 0.5rem 0.8rem;
-        border: 1px solid rgba(114, 245, 164, 0.16);
-        border-radius: 999px;
-        background: rgba(114, 245, 164, 0.08);
-        font-size: 0.78rem;
-        letter-spacing: 0.16em;
-        text-transform: uppercase;
-      }
-
-      .timeline-card h3 {
-        margin: 1rem 0 0;
-        font-size: 1.35rem;
-      }
-
-      .timeline-card__role {
-        display: block;
-        margin-top: 0.5rem;
-        color: var(--acid);
-        font-weight: 600;
-      }
-
-      .timeline-card ul {
-        display: grid;
-        gap: 0.6rem;
-        margin: 1rem 0 0;
-        padding: 0;
-        list-style: none;
-      }
-
-      .timeline-card li {
-        position: relative;
-        padding-left: 1.1rem;
-        color: var(--muted);
-      }
-
-      .timeline-card li::before {
-        content: "";
-        position: absolute;
-        left: 0;
-        top: 0.65em;
-        width: 6px;
-        height: 6px;
-        border-radius: 50%;
-        background: var(--cyan);
-      }
-
-      .timeline-card__status {
-        display: inline-flex;
-        margin-top: 1.2rem;
-        padding: 0.56rem 0.8rem;
-        border-radius: 999px;
-        background: rgba(114, 245, 164, 0.08);
-        color: var(--text);
-        font-size: 0.78rem;
-        letter-spacing: 0.16em;
-        text-transform: uppercase;
-      }
-
-      .timeline-card__status--archived {
-        background: rgba(255, 199, 107, 0.09);
-        color: var(--amber);
-      }
-
-      .timeline-card__status--completed {
-        background: rgba(115, 223, 247, 0.1);
-        color: var(--cyan);
-      }
-
-      .contact-grid {
-        display: grid;
-        grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
-        gap: 1.15rem;
-        align-items: start;
-      }
-
-      .contact-panel {
-        padding: 1.8rem;
-      }
-
-      .contact-panel p {
-        color: var(--muted);
-      }
-
-      .contact-pills {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.75rem;
-        margin-top: 1.35rem;
-      }
-
-      .contact-pills span {
-        padding: 0.72rem 0.92rem;
-        border: 1px solid rgba(114, 245, 164, 0.12);
-        border-radius: 999px;
-        background: rgba(114, 245, 164, 0.08);
-        font-size: 0.86rem;
-      }
-
-      .contact-terminal {
-        padding: 1.4rem;
-      }
-
-      .command-list {
-        display: grid;
-        gap: 0.85rem;
-        margin: 0;
-        padding: 0;
-        list-style: none;
-      }
-
-      .command-list li {
-        position: relative;
-        padding: 1rem 1rem 1rem 3rem;
-        border: 1px solid rgba(114, 245, 164, 0.1);
-        border-radius: 20px;
-        background: rgba(4, 10, 7, 0.62);
-      }
-
-      .command-list li::before {
-        content: ">";
-        position: absolute;
-        left: 1.2rem;
-        top: 1rem;
-        color: var(--acid);
-        font-family: "IBM Plex Mono", monospace;
-      }
-
-      .contact-links {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 1rem;
-        margin-top: 1rem;
-      }
-
-      .contact-link {
-        padding: 1rem;
-        border: 1px solid rgba(114, 245, 164, 0.12);
-        border-radius: 22px;
-        background: rgba(8, 15, 11, 0.72);
-        transition:
-          transform 0.28s ease,
-          border-color 0.28s ease,
-          background 0.28s ease;
-      }
-
-      .contact-link:hover,
-      .contact-link:focus-visible {
-        transform: translateY(-4px);
-        border-color: rgba(114, 245, 164, 0.28);
-        background: rgba(114, 245, 164, 0.08);
-      }
-
-      .contact-link small {
-        display: block;
-        color: var(--muted);
-        font-size: 0.72rem;
-        letter-spacing: 0.18em;
-        text-transform: uppercase;
-      }
-
-      .contact-link strong {
-        display: block;
-        margin-top: 0.45rem;
-        font-size: 1rem;
-        word-break: break-word;
-      }
-
-      .contact-actions {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 1rem;
-        margin-top: 1.45rem;
-      }
-
-      .footer {
-        padding: 2rem 0 3rem;
-      }
-
-      .footer__shell {
-        width: min(var(--max-width), calc(100% - 2.5rem));
-        margin-inline: auto;
-        padding-top: 1.5rem;
-        border-top: 1px solid rgba(114, 245, 164, 0.1);
-      }
-
-      .footer__cursor {
-        display: inline-block;
-        width: 0.55em;
-        height: 0.9em;
-        background: var(--acid);
-        opacity: 0.85;
-        vertical-align: text-bottom;
-        animation: blink 1.1s step-end infinite;
-      }
-
-      .toast {
-        position: fixed;
-        right: 1rem;
-        bottom: 1rem;
-        z-index: 150;
-        padding: 0.95rem 1.1rem;
-        border: 1px solid var(--line-strong);
-        border-radius: 18px;
-        background: rgba(7, 16, 11, 0.9);
-        box-shadow: var(--shadow-soft);
-        transform: translateY(140%);
-        opacity: 0;
-        transition:
-          transform 0.28s ease,
-          opacity 0.28s ease;
-      }
-
-      .toast.is-visible {
-        transform: translateY(0);
-        opacity: 1;
-      }
-
-      @keyframes blink {
-        0%,
-        49% {
-          opacity: 1;
-        }
-
-        50%,
-        100% {
-          opacity: 0;
-        }
-      }
-
-      @keyframes spin {
-        from {
-          transform: rotate(0deg);
-        }
-
-        to {
-          transform: rotate(360deg);
-        }
-      }
-
-      @keyframes lineSweep {
-        from {
-          transform: translateX(-100%);
-        }
-
-        to {
-          transform: translateX(100%);
-        }
-      }
-
-      @media (max-width: 1180px) {
-        .hero__inner,
-        .about-grid,
-        .contact-grid {
-          grid-template-columns: 1fr;
-        }
-
-        .hero-portrait {
-          width: 100%;
-          max-width: 560px;
-          margin-inline: auto;
-        }
-
-      }
-
-      @media (max-width: 900px) {
-        .section-shell,
-        .footer__shell {
-          width: min(var(--max-width), calc(100% - 1.25rem));
-        }
-
-        .site-header {
-          inset-block-start: 0.75rem;
-        }
-
-        .header-shell {
-          display: grid;
-          grid-template-columns: minmax(0, 1fr) auto;
-          align-items: center;
-          gap: 0.75rem;
-          padding: 0.85rem 0.9rem;
-        }
-
-        .nav-toggle {
-          display: grid;
-        }
-
-        .site-nav {
-          position: absolute;
-          inset: calc(100% + 0.75rem) 0 auto;
-          display: grid;
-          gap: 0.35rem;
-          padding: 1rem;
-          border: 1px solid var(--line-strong);
-          border-radius: 22px;
-          background: rgba(7, 16, 11, 0.92);
-          box-shadow: var(--shadow-soft);
-          opacity: 0;
-          visibility: hidden;
-          pointer-events: none;
-          transform: translateY(-12px);
-          transition:
-            opacity 0.25s ease,
-            transform 0.25s ease,
-            visibility 0.25s ease;
-        }
-
-        .site-nav.is-open {
-          opacity: 1;
-          visibility: visible;
-          pointer-events: auto;
-          transform: translateY(0);
-        }
-
-        .site-nav a {
-          width: 100%;
-        }
-
-        .hero {
-          min-height: auto;
-          padding-top: 7.2rem;
-          padding-bottom: 2.8rem;
-          align-items: flex-start;
-        }
-
-        .hero__inner {
-          gap: 1.9rem;
-          padding-bottom: 0;
-        }
-
-        .hero-copy {
-          max-width: none;
-        }
-
-        .hero-title__text {
-          font-size: clamp(2.8rem, 12vw, 4.6rem);
-        }
-
-        .role-rotator {
-          max-width: 100%;
-          flex-wrap: wrap;
-          row-gap: 0.35rem;
-        }
-
-        .hero-stats {
-          max-width: none;
-        }
-
-        .portrait-shell {
-          min-height: 510px;
-        }
-
-        .hero-contacts {
-          max-width: none;
-          display: grid;
-          grid-template-columns: repeat(2, minmax(0, 1fr));
-        }
-
-        .showcase-metrics {
-          grid-template-columns: 1fr;
-        }
-
-        .showcase-frame {
-          width: min(var(--max-width), calc(100% - 1.25rem));
-        }
-
-        .showcase-track {
-          grid-template-columns: 1fr;
-          gap: 1rem;
-        }
-
-        .showcase-card {
-          min-height: auto;
-        }
-
-        .timeline::before {
-          left: 18px;
-          transform: none;
-        }
-
-        .timeline-card {
-          width: auto;
-          margin-left: 2.4rem !important;
-          margin-right: 0 !important;
-        }
-
-        .timeline-card::before {
-          left: -2.2rem !important;
-          right: auto !important;
-        }
-
-        .footer__shell {
-          flex-direction: column;
-          align-items: flex-start;
-        }
-      }
-
-      @media (max-width: 640px) {
-        .about-card-grid,
-        .contact-links {
-          grid-template-columns: 1fr;
-        }
-
-        .section-shell,
-        .footer__shell {
-          width: calc(100% - 1rem);
-        }
-
-        .site-header {
-          inset-block-start: 0.5rem;
-        }
-
-        .header-shell {
-          gap: 0.55rem;
-          padding: 0.78rem 0.8rem;
-          border-radius: 20px;
-        }
-
-        .brand__kicker {
-          font-size: 0.56rem;
-          letter-spacing: 0.14em;
-        }
-
-        .brand__name {
-          font-size: 0.88rem;
-          letter-spacing: 0.04em;
-        }
-
-        body::before {
-          opacity: 0.12;
-        }
-
-        .hero {
-          min-height: auto;
-          padding-top: 6rem;
-          padding-bottom: 2.4rem;
-        }
-
-        .hero__grid {
-          inset: auto -14% -8%;
-          height: 58%;
-          opacity: 0.16;
-          background-size: 30px 30px;
-        }
-
-        .hero__orb--one {
-          top: -8rem;
-          right: -12rem;
-          width: 28rem;
-          height: 28rem;
-          filter: blur(62px);
-        }
-
-        .hero__orb--two {
-          left: -12rem;
-          bottom: -8rem;
-          width: 22rem;
-          height: 22rem;
-          filter: blur(56px);
-        }
-
-        .hero__inner {
-          gap: 1.2rem;
-        }
-
-        .hero-copy .eyebrow {
-          max-width: 19rem;
-          font-size: 0.75rem;
-          line-height: 1.5;
-          letter-spacing: 0.18em;
-        }
-
-        .hero-title {
-          margin: 0.35rem 0 0.55rem;
-          gap: 0.12rem;
-        }
-
-        .hero-title__text {
-          font-size: clamp(1.82rem, 9.2vw, 2.55rem);
-          line-height: 0.92;
-          letter-spacing: -0.045em;
-        }
-
-        .hero-title__caption {
-          margin: 0 0 0.9rem;
-          font-size: 0.88rem;
-          letter-spacing: 0.14em;
-        }
-
-        .hero-copy__lead {
-          max-width: none;
-          font-size: 0.98rem;
-        }
-
-        .role-rotator {
-          display: flex;
-          width: 100%;
-          justify-content: flex-start;
-          gap: 0.45rem;
-          padding: 0.85rem 0.95rem;
-          border-radius: 18px;
-          margin-top: 1rem;
-          font-size: 0.68rem;
-          letter-spacing: 0.14em;
-        }
-
-        #role-rotator {
-          letter-spacing: 0.02em;
-        }
-
-        .hero-contacts {
-          grid-template-columns: 1fr;
-          gap: 0.65rem;
-          margin-top: 0.9rem;
-        }
-
-        .hero-contact {
-          padding: 0.82rem 0.9rem;
-          border-radius: 16px;
-        }
-
-        .hero-contact strong {
-          font-size: 0.9rem;
-        }
-
-        .button {
-          width: 100%;
-        }
-
-        .hero-stats {
-          grid-template-columns: 1fr;
-          gap: 0.7rem;
-          margin-top: 0.9rem;
-        }
-
-        .stat-card {
-          padding: 1rem 0.95rem;
-          border-radius: 20px;
-        }
-
-        .stat-card__value {
-          font-size: 1.8rem;
-        }
-
-        .stat-card:last-child {
-          grid-column: auto;
-        }
-
-        .portrait-shell {
-          min-height: 340px;
-          padding: 0.85rem;
-          border-radius: 24px;
-        }
-
-        .portrait-photo {
-          inset: 0.85rem;
-          border-radius: 20px;
-        }
-
-        .portrait-badge {
-          top: 1rem;
-          left: 1rem;
-          padding: 0.58rem 0.74rem;
-          font-size: 0.65rem;
-        }
-
-        .portrait-ring,
-        .portrait-ring--two {
-          display: none;
-        }
-
-        .section {
-          padding-block: 4rem;
-          scroll-margin-top: 6.5rem;
-        }
-
-        .section--about {
-          padding-top: 4.5rem;
-        }
-
-        .section-heading {
-          max-width: none;
-          margin-bottom: 2rem;
-        }
-
-        .section-title {
-          font-size: clamp(1.62rem, 8.4vw, 2.18rem);
-          letter-spacing: -0.04em;
-          line-height: 0.96;
-        }
-
-        .section-copy {
-          max-width: none;
-          font-size: 0.98rem;
-        }
-
-        .contact-grid {
-          gap: 0.9rem;
-        }
-
-        .contact-panel,
-        .contact-terminal {
-          padding: 1.2rem;
-        }
-
-        .command-list li {
-          padding: 0.9rem 0.9rem 0.9rem 2.7rem;
-        }
-
-        .contact-actions {
-          display: grid;
-          grid-template-columns: 1fr;
-          gap: 0.75rem;
-        }
-
-        .showcase-card,
-        .timeline-card,
-        .contact-panel,
-        .terminal-panel {
-          border-radius: 26px;
-        }
-      }
-
-      @media (prefers-reduced-motion: reduce) {
-        html {
-          scroll-behavior: auto;
-        }
-
-        *,
-        *::before,
-        *::after {
-          animation-duration: 0.01ms !important;
-          animation-iteration-count: 1 !important;
-          transition-duration: 0.01ms !important;
-          scroll-behavior: auto !important;
-        }
-      }
-
-      /* ============================================================
-         PARTICLE CHAT
-         ============================================================ */
-      #particle-chat {
-        position: fixed;
-        bottom: 2rem;
-        right: 2rem;
-        width: min(420px, calc(100vw - 2rem));
-        background: rgba(4, 14, 8, 0.92);
-        border: 1px solid rgba(114, 245, 164, 0.2);
-        border-radius: 24px;
-        backdrop-filter: blur(18px);
-        z-index: 200;
-        display: flex;
-        flex-direction: column;
-        overflow: hidden;
-        opacity: 0;
-        transform: translateY(16px) scale(0.97);
-        transition: opacity 0.3s ease, transform 0.3s ease;
-        box-shadow: 0 0 40px rgba(114, 245, 164, 0.08), 0 24px 48px rgba(0,0,0,0.5);
-      }
-      #particle-chat.pc-open {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
-      .pc-bar {
-        display: flex;
-        align-items: center;
-        gap: 0.75rem;
-        padding: 0.9rem 1.2rem;
-        border-bottom: 1px solid rgba(114, 245, 164, 0.12);
-      }
-      .pc-dots { display: flex; gap: 0.4rem; }
-      .pc-dots span { width: 11px; height: 11px; border-radius: 50%; }
-      .pc-dots span:nth-child(1) { background: #ff6f7d; }
-      .pc-dots span:nth-child(2) { background: #ffd166; }
-      .pc-dots span:nth-child(3) { background: #72f5a4; }
-      .pc-label {
-        flex: 1;
-        font-family: 'IBM Plex Mono', monospace;
-        font-size: 0.72rem;
-        letter-spacing: 0.2em;
-        color: var(--muted);
-        text-transform: uppercase;
-      }
-      .pc-close {
-        background: none;
-        border: none;
-        color: var(--muted);
-        font-size: 1.2rem;
-        cursor: pointer;
-        line-height: 1;
-        padding: 0 0.2rem;
-        transition: color 0.2s;
-      }
-      .pc-close:hover { color: var(--accent); }
-      .pc-messages {
-        flex: 1;
-        overflow-y: auto;
-        padding: 1rem 1.2rem;
-        display: flex;
-        flex-direction: column;
-        gap: 0.75rem;
-        max-height: 340px;
-        min-height: 140px;
-      }
-      .pc-messages::-webkit-scrollbar { width: 4px; }
-      .pc-messages::-webkit-scrollbar-track { background: transparent; }
-      .pc-messages::-webkit-scrollbar-thumb { background: rgba(114, 245, 164, 0.2); border-radius: 2px; }
-      .pc-suggestions { display: flex; flex-direction: column; gap: 0.5rem; }
-      .pc-suggestion {
-        background: rgba(114, 245, 164, 0.06);
-        border: 1px solid rgba(114, 245, 164, 0.18);
-        border-radius: 12px;
-        color: var(--accent);
-        font-family: 'IBM Plex Mono', monospace;
-        font-size: 0.75rem;
-        padding: 0.6rem 0.9rem;
-        cursor: pointer;
-        text-align: left;
-        transition: background 0.2s, border-color 0.2s;
-      }
-      .pc-suggestion:hover {
-        background: rgba(114, 245, 164, 0.12);
-        border-color: rgba(114, 245, 164, 0.4);
-      }
-      .pc-msg {
-        font-family: 'IBM Plex Mono', monospace;
-        font-size: 0.78rem;
-        line-height: 1.6;
-        max-width: 88%;
-      }
-      .pc-msg--user {
-        align-self: flex-end;
-        background: rgba(114, 245, 164, 0.1);
-        border: 1px solid rgba(114, 245, 164, 0.2);
-        border-radius: 14px 14px 4px 14px;
-        padding: 0.5rem 0.8rem;
-        color: var(--accent);
-      }
-      .pc-msg--ai {
-        align-self: flex-start;
-        color: var(--fg);
-        padding: 0.2rem 0;
-      }
-      .pc-prompt { color: var(--accent); margin-right: 0.4rem; }
-      .pc-typing {
-        display: grid;
-        gap: 0.5rem;
-        padding: 0.75rem 0.9rem;
-        border: 1px solid rgba(114, 245, 164, 0.12);
-        border-radius: 16px;
-        background: rgba(7, 16, 11, 0.46);
-      }
-      .pc-loader-line {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        gap: 0.35rem;
-      }
-      .pc-loader-text {
-        color: var(--muted);
-        font-size: 0.72rem;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-      }
-      .pc-loader-track {
-        display: flex;
-        gap: 0.3rem;
-        align-items: center;
-      }
-      .pc-loader-track span {
-        width: 6px; height: 6px;
-        background: var(--accent);
-        border-radius: 50%;
-        animation: pcBounce 1.2s infinite;
-      }
-      .pc-loader-track span:nth-child(2) { animation-delay: 0.2s; }
-      .pc-loader-track span:nth-child(3) { animation-delay: 0.4s; }
-      @keyframes pcBounce {
-        0%, 80%, 100% { opacity: 0.3; transform: scale(0.8); }
-        40% { opacity: 1; transform: scale(1); }
-      }
-      .pc-form {
-        display: flex;
-        gap: 0.5rem;
-        padding: 0.8rem 1.2rem;
-        border-top: 1px solid rgba(114, 245, 164, 0.12);
-      }
-      .pc-input {
-        flex: 1;
-        background: rgba(114, 245, 164, 0.05);
-        border: 1px solid rgba(114, 245, 164, 0.15);
-        border-radius: 12px;
-        color: var(--fg);
-        font-family: 'IBM Plex Mono', monospace;
-        font-size: 0.78rem;
-        padding: 0.5rem 0.8rem;
-        outline: none;
-        transition: border-color 0.2s;
-      }
-      .pc-input:focus { border-color: rgba(114, 245, 164, 0.4); }
-      .pc-input::placeholder { color: var(--muted); }
-      .pc-send {
-        background: rgba(114, 245, 164, 0.12);
-        border: 1px solid rgba(114, 245, 164, 0.25);
-        border-radius: 12px;
-        color: var(--accent);
-        cursor: pointer;
-        padding: 0.5rem 0.7rem;
-        font-size: 1rem;
-        transition: background 0.2s;
-      }
-      .pc-send:hover { background: rgba(114, 245, 164, 0.22); }
-      .pc-hint {
-        position: fixed;
-        font-family: 'IBM Plex Mono', monospace;
-        font-size: 0.65rem;
-        color: rgba(114, 245, 164, 0.5);
-        letter-spacing: 0.12em;
-        pointer-events: none;
-        z-index: 50;
-        text-transform: uppercase;
-        animation: pcHintPulse 2.5s ease-in-out infinite;
-        white-space: nowrap;
-      }
-      @keyframes pcHintPulse {
-        0%, 100% { opacity: 0.4; }
-        50% { opacity: 0.9; }
-      }
-
-      .pc-chat-trigger {
-        position: fixed;
-        right: 0.8rem;
-        bottom: calc(env(safe-area-inset-bottom, 0px) + 0.8rem);
-        display: inline-flex;
-        align-items: center;
-        gap: 0.65rem;
-        padding: 0.8rem 0.92rem;
-        border: 1px solid rgba(114, 245, 164, 0.22);
-        border-radius: 999px;
-        background: rgba(6, 16, 10, 0.92);
-        color: var(--text);
-        box-shadow: 0 14px 32px rgba(0, 0, 0, 0.28);
-        backdrop-filter: blur(18px);
-        z-index: 210;
-        transition:
-          transform 0.25s ease,
-          opacity 0.25s ease,
-          border-color 0.25s ease;
-      }
-
-      .pc-chat-trigger i {
-        font-size: 1rem;
-        color: var(--accent);
-      }
-
-      .pc-chat-trigger span {
-        font-size: 0.72rem;
-        letter-spacing: 0.14em;
-        text-transform: uppercase;
-      }
-
-      .pc-chat-trigger.is-hidden {
-        opacity: 0;
-        pointer-events: none;
-        transform: translateY(14px);
-      }
-
-      body.is-mobile-chat main {
-        padding-bottom: 5.25rem;
-      }
-
-      body.is-mobile-chat #particle-chat {
-        left: 0.5rem;
-        right: 0.5rem;
-        bottom: calc(env(safe-area-inset-bottom, 0px) + 0.6rem);
-        width: auto;
-        max-width: none;
-        max-height: min(72svh, 36rem);
-        border-radius: 22px;
-      }
-
-      body.is-mobile-chat .pc-bar,
-      body.is-mobile-chat .pc-form {
-        padding-inline: 1rem;
-      }
-
-      body.is-mobile-chat .pc-messages {
-        max-height: min(46svh, 19rem);
-        padding-inline: 1rem;
-      }
-
-      body.is-mobile-chat .pc-msg {
-        max-width: 100%;
-      }
-
-      body.is-mobile-chat .pc-hint {
-        display: none !important;
-      }
-
-      @media (max-width: 640px) {
-        .pc-chat-trigger {
-          min-width: 52px;
-          min-height: 52px;
-          justify-content: center;
-          padding: 0.85rem;
-          border-radius: 18px;
-        }
-
-        .pc-chat-trigger span {
-          display: none;
-        }
-      }
-    </style>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+      rel="preload"
+      href="assets/space-grotesk.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="app.js" defer></script>
   </head>
   <body>
-    <div class="top-progress" aria-hidden="true">
-      <div class="top-progress__bar"></div>
-    </div>
-    <div class="pointer-glow" aria-hidden="true"></div>
-
-    <header class="site-header">
-      <div class="header-shell">
-        <a class="brand" href="#home" aria-label="Go to top">
-          <span class="brand__kicker mono">System online / Rome, Italy</span>
-          <span class="brand__name display">Francesco Laterza</span>
-        </a>
-
-        <nav class="site-nav" id="site-nav" aria-label="Primary navigation">
-          <a href="#home">Home</a>
-          <a href="#about">About</a>
-          <a href="#skills">Skills</a>
-          <a href="#experience">Experience</a>
-          <a href="#contact">Contact</a>
-        </nav>
-
-        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Toggle menu">
-          <i class="ri-menu-line" aria-hidden="true"></i>
-        </button>
-      </div>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="header">
+      <a class="wordmark" href="#home" aria-label="Francesco Laterza, home"
+        >francesco<span>laterza.</span></a
+      >
+      <nav class="nav" aria-label="Main navigation" id="navigation">
+        <a href="#about">The human</a><a href="#expertise">The practice</a
+        ><a href="#playground">The playground</a>
+      </nav>
+      <a class="header-contact" href="#contact"
+        >Let's talk
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M5 19 19 5M5 5h14v14" /></svg
+      ></a>
+      <button
+        class="menu-button mono"
+        aria-expanded="false"
+        aria-controls="navigation"
+        type="button"
+      >
+        Menu
+      </button>
     </header>
 
-    <main>
-      <section class="hero" id="home">
-        <div class="hero__backdrop" aria-hidden="true">
-          <div class="hero__noise"></div>
-          <div class="hero__grid"></div>
-          <div class="hero__orb hero__orb--one"></div>
-          <div class="hero__orb hero__orb--two"></div>
-        </div>
-
-        <div class="section-shell hero__inner">
-          <div class="hero-copy">
-            <p class="eyebrow mono">Creative technologist / CTO / immersive systems</p>
-
-            <div class="hero-title">
-              <span class="hero-title__line"><span class="hero-title__text display">Future-ready</span></span>
-              <span class="hero-title__line"><span class="hero-title__text display signal">digital</span></span>
-              <span class="hero-title__line"><span class="hero-title__text display accent">experiences</span></span>
-            </div>
-            <p class="hero-title__caption display">With a hacker soul.</p>
-
-            <p class="hero-copy__lead">
-              I build products, learning formats and innovation ecosystems that make advanced technology feel human, useful and unforgettable.
+    <main id="main">
+      <section class="hero" id="home" aria-labelledby="hero-title">
+        <div class="hero-grid" aria-hidden="true"></div>
+        <div class="hero-heading">
+          <p class="eyebrow entrance">
+            Independent mind. Interconnected disciplines.
+          </p>
+          <h1 id="hero-title">
+            <span class="title-line entrance">Curiosity,</span
+            ><span class="title-line accent entrance">engineered.</span>
+          </h1>
+          <div class="hero-intro entrance">
+            <p>
+              I turn complex technology into<br />things that make people
+              <em>feel, learn,<br />and do something new.</em>
             </p>
-
-            <div class="role-rotator mono">
-              Current signal:
-              <span id="role-rotator">Chief Technology Officer</span>
-            </div>
-
-            <div class="hero-contacts">
-              <a class="hero-contact magnetic" href="mailto:francescolaterza@gmail.com">
-                <small><i class="ri-mail-line" aria-hidden="true"></i>Email</small>
-                <strong>francescolaterza@gmail.com</strong>
-              </a>
-
-              <a class="hero-contact magnetic" href="https://www.linkedin.com/in/flat3/" target="_blank" rel="noreferrer">
-                <small><i class="ri-linkedin-line" aria-hidden="true"></i>LinkedIn</small>
-                <strong>linkedin.com/in/flat3</strong>
-              </a>
-            </div>
-
-            <div class="hero-stats">
-              <article class="stat-card" data-tilt>
-                <span class="stat-card__value" data-counter="17" data-suffix="+">17+</span>
-                <span class="stat-card__label">Years navigating tech, education and product innovation</span>
-              </article>
-              <article class="stat-card" data-tilt>
-                <span class="stat-card__value" data-counter="4" data-suffix="">4</span>
-                <span class="stat-card__label">Core domains: web, GenAI, immersive tech and fabrication</span>
-              </article>
-              <article class="stat-card" data-tilt>
-                <span class="stat-card__value" data-counter="3" data-suffix="">3</span>
-                <span class="stat-card__label">Perspectives in one profile: CTO, strategist and trainer</span>
-              </article>
-            </div>
+            <a class="text-link" href="#expertise"
+              >Explore my world
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 4v16m-6-6 6 6 6-6" /></svg
+            ></a>
           </div>
-
-          <div class="hero-portrait">
-            <div class="portrait-shell" data-reveal="zoom">
-              <div class="portrait-ring" aria-hidden="true"></div>
-              <div class="portrait-ring portrait-ring--two" aria-hidden="true"></div>
-              <div class="portrait-badge mono">Rome / Italy</div>
-              <div class="portrait-photo">
-                <img src="cyberfra.png" alt="Portrait of Francesco Laterza" loading="lazy" decoding="async">
-              </div>
+        </div>
+        <div class="hero-art" id="hero-art">
+          <div class="art-meta mono">
+            <span>Experiment 001</span><span>Living geometry</span>
+          </div>
+          <canvas
+            id="sculpture"
+            aria-label="Interactive wire sculpture. Use the shape buttons to transform it, or drag horizontally to rotate."
+            tabindex="0"
+          ></canvas>
+          <div class="art-footer">
+            <span class="mono art-hint">Drag to explore</span>
+            <div
+              class="shape-controls"
+              role="group"
+              aria-label="Sculpture shape"
+            >
+              <button type="button" data-shape="0" aria-pressed="true">
+                Knot
+              </button>
+              <button type="button" data-shape="1" aria-pressed="false">
+                Orbit
+              </button>
+              <button type="button" data-shape="2" aria-pressed="false">
+                Bloom
+              </button>
             </div>
           </div>
         </div>
-
-      </section>
-
-      <section class="section section--about" id="about">
-        <div class="section-shell">
-          <div class="section-heading" data-reveal="up">
-            <p class="eyebrow mono">Profile / Core mission</p>
-            <h2 class="section-title display">Technology that teaches, inspires and scales.</h2>
-            <p class="section-copy">
-              Management Engineer with more than a decade in tech, specialized in immersive technologies, digital fabrication and STEM education, with a strong bias toward execution, clarity and future-focused learning experiences.
-            </p>
+        <div class="hero-bottom">
+          <div>
+            <span class="status-dot" aria-hidden="true"></span
+            ><span class="mono">Based in Rome, Italy</span>
           </div>
-
-          <div class="about-grid">
-            <article class="glass-panel terminal-panel" data-reveal="left">
-              <div class="terminal-bar">
-                <div class="terminal-dots" aria-hidden="true">
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                </div>
-                <span class="terminal-label mono">C:\users\francesco\profile.txt</span>
-              </div>
-
-              <div class="terminal-screen mono">
-                <p><span class="prompt">&gt; access_profile()</span></p>
-                <p class="dim">[OK] Mission loaded. Human-centered innovation pipeline active.</p>
-                <p>
-                  I bridge complex technologies and real people, turning advanced tools into products, workshops and ecosystems that are practical, exciting and culturally relevant.
-                </p>
-                <p>
-                  My sweet spot sits where leadership, experimentation and education overlap: from product thinking and growth automation to VR/AR training, maker culture and next-generation digital literacy.
-                </p>
-                <p class="dim">
-                  [VALUES] Curiosity / clarity / impact / access / multidisciplinary execution
-                </p>
-              </div>
-            </article>
-
-            <div class="about-card-grid">
-              <article class="info-card" data-reveal="up" data-tilt>
-                <div class="info-card__icon"><i class="ri-command-line"></i></div>
-                <h3>Leadership &amp; Product</h3>
-                <p>Strategic thinking with hands-on delivery, from roadmap framing to operational execution.</p>
-                <ul>
-                  <li>CTO and founder perspective</li>
-                  <li>Growth, automation and systems thinking</li>
-                  <li>Multidisciplinary team direction</li>
-                </ul>
-              </article>
-
-              <article class="info-card" data-reveal="up" data-tilt>
-                <div class="info-card__icon" aria-hidden="true">
-                  <svg viewBox="0 0 24 24">
-                    <path d="M4.5 10.5c0-1.66 1.34-3 3-3h9c1.66 0 3 1.34 3 3v3c0 1.66-1.34 3-3 3h-2.75L12 15l-1.75 1.5H7.5c-1.66 0-3-1.34-3-3z"></path>
-                    <circle cx="9.25" cy="12" r="0.9" fill="currentColor" stroke="none"></circle>
-                    <circle cx="14.75" cy="12" r="0.9" fill="currentColor" stroke="none"></circle>
-                    <path d="M8.5 16.5 7 19"></path>
-                    <path d="M15.5 16.5 17 19"></path>
-                  </svg>
-                </div>
-                <h3>Immersive Tech</h3>
-                <p>Experiences that make learning deeper, more visual and more memorable.</p>
-                <ul>
-                  <li>VR / AR learning design</li>
-                  <li>Interactive formats and workshops</li>
-                  <li>Future-facing educational storytelling</li>
-                </ul>
-              </article>
-
-              <article class="info-card" data-reveal="up" data-tilt>
-                <div class="info-card__icon"><i class="ri-printer-line"></i></div>
-                <h3>Fabrication &amp; Making</h3>
-                <p>Digital fabrication as a way to prototype ideas, empower people and build communities.</p>
-                <ul>
-                  <li>3D printing and scanning</li>
-                  <li>CAD modeling and maker workflows</li>
-                  <li>Fab lab operations and training</li>
-                </ul>
-              </article>
-
-              <article class="info-card" data-reveal="up" data-tilt>
-                <div class="info-card__icon"><i class="ri-graduation-cap-line"></i></div>
-                <h3>Education &amp; Culture</h3>
-                <p>Programs that lower the barrier to innovation and help people act on emerging tools.</p>
-                <ul>
-                  <li>STEM and GenAI education</li>
-                  <li>Public speaking and facilitation</li>
-                  <li>Technology adoption with real impact</li>
-                </ul>
-              </article>
-            </div>
-          </div>
+          <p>
+            Creative Technologist <span class="muted">/</span> Chief Technology
+            Officer
+          </p>
+          <a href="#about" class="scroll-cue mono"
+            >Keep exploring
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 4v16m-6-6 6 6 6-6" /></svg
+          ></a>
         </div>
       </section>
 
-      <section class="section section--skills" id="skills">
-        <div class="section-shell">
-          <div class="section-heading section-heading--center" data-reveal="up">
-            <p class="eyebrow mono">Capabilities / Scroll-driven showcase</p>
-            <h2 class="section-title display">A multidimensional practice, not a single lane.</h2>
-            <p class="section-copy" style="margin-inline: auto;">
-              The portfolio spans product strategy, immersive learning, fabrication culture and leadership. Each area reinforces the others, creating a profile designed for hybrid challenges and ambitious experiments.
-            </p>
-          </div>
+      <section
+        class="about section-pad"
+        id="about"
+        aria-labelledby="about-title"
+      >
+        <div class="section-top">
+          <p class="eyebrow">01 / The human behind the technology</p>
         </div>
-
-        <div class="showcase-wrap">
-          <div class="showcase-frame">
-            <div class="showcase-sticky">
-              <div class="showcase-track">
-                <article class="showcase-card">
-                  <span class="showcase-card__index display">01</span>
-                  <div class="showcase-card__icon"><i class="ri-code-box-line"></i></div>
-                  <h3>Web systems with personality.</h3>
-                  <p>
-                    From concept to launch, I shape digital products that combine technical solidity with distinctive interaction design and a clear user journey.
-                  </p>
-                  <div class="showcase-metrics">
-                    <div class="metric">
-                      <span class="metric__label mono">Focus</span>
-                      <span class="metric__value">Product thinking + frontend craft</span>
-                    </div>
-                    <div class="metric">
-                      <span class="metric__label mono">Output</span>
-                      <span class="metric__value">Web experiences that feel alive</span>
-                    </div>
-                  </div>
-                  <div class="showcase-tags">
-                    <span>Web Development</span>
-                    <span>Growth Automation</span>
-                    <span>Creative Direction</span>
-                  </div>
-                  <div class="showcase-card__line"></div>
-                </article>
-
-                <article class="showcase-card showcase-card--cyan">
-                  <span class="showcase-card__index display">02</span>
-                  <div class="showcase-card__icon"><i class="ri-ai-generate"></i></div>
-                  <h3>Learning experiences for emerging tech.</h3>
-                  <p>
-                    I translate GenAI, immersive tools and digital transformation into formats people can actually understand, adopt and use with confidence.
-                  </p>
-                  <div class="showcase-metrics">
-                    <div class="metric">
-                      <span class="metric__label mono">Focus</span>
-                      <span class="metric__value">STEM, GenAI and training design</span>
-                    </div>
-                    <div class="metric">
-                      <span class="metric__label mono">Output</span>
-                      <span class="metric__value">Programs that spark agency</span>
-                    </div>
-                  </div>
-                  <div class="showcase-tags">
-                    <span>GenAI Education</span>
-                    <span>Workshop Design</span>
-                    <span>Public Speaking</span>
-                  </div>
-                  <div class="showcase-card__line"></div>
-                </article>
-
-                <article class="showcase-card showcase-card--amber">
-                  <span class="showcase-card__index display">03</span>
-                  <div class="showcase-card__icon"><i class="ri-printer-line"></i></div>
-                  <h3>From pixels to prototypes.</h3>
-                  <p>
-                    Digital fabrication lets me move ideas from theory to tangible reality, creating hands-on pathways to innovation for teams, students and communities.
-                  </p>
-                  <div class="showcase-metrics">
-                    <div class="metric">
-                      <span class="metric__label mono">Focus</span>
-                      <span class="metric__value">3D printing, scanning and CAD</span>
-                    </div>
-                    <div class="metric">
-                      <span class="metric__label mono">Output</span>
-                      <span class="metric__value">Labs, prototypes and maker culture</span>
-                    </div>
-                  </div>
-                  <div class="showcase-tags">
-                    <span>3D Printing</span>
-                    <span>CAD Modeling</span>
-                    <span>Fab Lab Operations</span>
-                  </div>
-                  <div class="showcase-card__line"></div>
-                </article>
-
-                <article class="showcase-card showcase-card--rose">
-                  <span class="showcase-card__index display">04</span>
-                  <div class="showcase-card__icon"><i class="ri-team-line"></i></div>
-                  <h3>Leadership for messy, hybrid challenges.</h3>
-                  <p>
-                    I thrive where strategy, execution and communication need to align fast, especially in projects that mix creativity, technology and education.
-                  </p>
-                  <div class="showcase-metrics">
-                    <div class="metric">
-                      <span class="metric__label mono">Focus</span>
-                      <span class="metric__value">CTO leadership and innovation ops</span>
-                    </div>
-                    <div class="metric">
-                      <span class="metric__label mono">Output</span>
-                      <span class="metric__value">Teams that move with clarity</span>
-                    </div>
-                  </div>
-                  <div class="showcase-tags">
-                    <span>Project Management</span>
-                    <span>Team Enablement</span>
-                    <span>Innovation Strategy</span>
-                  </div>
-                  <div class="showcase-card__line"></div>
-                </article>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="section section--experience" id="experience">
-        <div class="section-shell">
-          <div class="section-heading section-heading--center" data-reveal="up">
-            <p class="eyebrow mono">Mission log / Timeline</p>
-            <h2 class="section-title display">A track record built across ventures, labs and education.</h2>
-            <p class="section-copy" style="margin-inline: auto;">
-              The path combines executive roles, entrepreneurial experiments and on-the-ground training work, always with a strong focus on innovation and technology literacy.
-            </p>
-          </div>
-
-          <div class="timeline">
-            <article class="timeline-card">
-              <span class="timeline-card__period mono">2019 — Present</span>
-              <h3>EIIS / European Institute for Innovation and Sustainability</h3>
-              <span class="timeline-card__role">Chief Technology Officer</span>
-              <ul>
-                <li>Led advanced technology infrastructure and product innovation initiatives.</li>
-                <li>Worked across growth marketing, automation and strategic digital systems.</li>
-                <li>Delivered STEM, VR and AR training experiences for future-oriented programs.</li>
-              </ul>
-              <span class="timeline-card__status mono">Status / active</span>
-            </article>
-
-            <article class="timeline-card">
-              <span class="timeline-card__period mono">2016 — 2019</span>
-              <h3>Italia Camp / Luiss Hub for Makers and Students</h3>
-              <span class="timeline-card__role">Freelance Trainer</span>
-              <ul>
-                <li>Designed and delivered STEM-oriented educational modules and workshops.</li>
-                <li>Guided digital fabrication sessions focused on practical experimentation.</li>
-                <li>Brought coding and game design into accessible learning experiences.</li>
-              </ul>
-              <span class="timeline-card__status timeline-card__status--completed mono">Status / completed</span>
-            </article>
-
-            <article class="timeline-card">
-              <span class="timeline-card__period mono">2014 — 2022</span>
-              <h3>ENGILAB / Engicon srl</h3>
-              <span class="timeline-card__role">Founder, CEO &amp; Fablab Manager</span>
-              <ul>
-                <li>Built a STEM-focused command center for local innovation and digital literacy.</li>
-                <li>Deployed 3D printing, scanning and fabrication workflows for education and consulting.</li>
-                <li>Supported organizations with technology strategy and practical implementation.</li>
-              </ul>
-              <span class="timeline-card__status timeline-card__status--archived mono">Status / archived</span>
-            </article>
-
-            <article class="timeline-card">
-              <span class="timeline-card__period mono">2016 — 2019</span>
-              <h3>Impactscool Network</h3>
-              <span class="timeline-card__role">Ambassador &amp; Future Activist</span>
-              <ul>
-                <li>Spread awareness around exponential technologies and emerging innovation themes.</li>
-                <li>Facilitated training sessions around STEM disciplines and future skills.</li>
-                <li>Helped connect inspiring technology narratives with young audiences.</li>
-              </ul>
-              <span class="timeline-card__status timeline-card__status--completed mono">Status / completed</span>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section class="section" id="contact">
-        <div class="section-shell">
-          <div class="section-heading" data-reveal="up">
-            <p class="eyebrow mono">Contact / Open channel</p>
-            <h2 class="section-title display">If the challenge is ambitious, let’s talk.</h2>
-            <p class="section-copy">
-              Available for strategy, product direction, education programs, speaking engagements and collaborations where technology needs both depth and imagination.
-            </p>
-          </div>
-
-          <div class="contact-grid">
-            <article class="glass-panel contact-panel" data-reveal="left">
-              <p class="eyebrow mono">Availability signal</p>
-              <h3 class="display" style="margin: 1rem 0 0; font-size: clamp(2rem, 4vw, 3.1rem); line-height: 1;">
-                Ready to design what’s next.
-              </h3>
-              <p style="margin: 1rem 0 0;">
-                The best projects usually sit at the intersection of product, education, immersive technology and culture. If you’re building there, we’ll probably have a lot to talk about.
+        <div class="about-layout">
+          <div class="about-copy">
+            <h2 class="statement" id="about-title" data-word-reveal>
+              Technology is interesting. What people do with it is
+              extraordinary.
+            </h2>
+            <div class="about-detail reveal">
+              <span class="small-index mono">Hello, I'm Francesco.</span>
+              <p>
+                Management engineer by training. Maker by instinct. I connect
+                the dots between technology, creativity and education, turning
+                ambitious ideas into useful digital products and hands-on
+                experiences.
               </p>
-              <div class="contact-pills">
-                <span>Consulting</span>
-                <span>Keynotes</span>
-                <span>Innovation Programs</span>
-                <span>Learning Design</span>
-              </div>
-            </article>
+              <p>
+                My sweet spot? Where a strategic mind meets a pair of hands that
+                can't wait to build.
+              </p>
+              <a
+                href="https://www.linkedin.com/in/flat3/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-link"
+                >A little more about me
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M5 19 19 5M5 5h14v14" /></svg
+              ></a>
+            </div>
+          </div>
+          <figure class="portrait reveal">
+            <div class="portrait-image">
+              <img
+                src="assets/francesco.webp"
+                alt="Francesco Laterza, creative technologist and CTO"
+                width="800"
+                height="1200"
+                loading="lazy"
+                decoding="async"
+              /><span class="portrait-outline" aria-hidden="true"></span>
+            </div>
+            <figcaption>
+              <span>Francesco, in his natural habitat.</span
+              ><span class="mono">Human / v.2026</span>
+            </figcaption>
+          </figure>
+        </div>
+        <div class="principles">
+          <span>Think in systems.</span><span>Build with purpose.</span
+          ><span>Stay a little weird.</span>
+        </div>
+      </section>
 
-            <article class="glass-panel contact-panel contact-terminal" data-reveal="right">
-              <div class="terminal-bar">
-                <div class="terminal-dots" aria-hidden="true">
-                  <span></span>
-                  <span></span>
-                  <span></span>
+      <section
+        class="expertise section-pad"
+        id="expertise"
+        aria-labelledby="expertise-title"
+      >
+        <div class="section-top">
+          <p class="eyebrow">02 / The practice</p>
+          <span class="mono">Different tools. One mindset.</span>
+        </div>
+        <div class="expertise-layout">
+          <div class="expertise-heading">
+            <h2 id="expertise-title">
+              Not made <br />for <span class="serif-word">one</span>
+              <br />single box.
+            </h2>
+            <p>Four connected disciplines.<br />One endlessly curious mind.</p>
+            <div class="discipline-nav" aria-label="Explore disciplines">
+              <a href="#discipline-web" class="is-active"
+                >01 <span>Digital &amp; AI</span></a
+              >
+              <a href="#discipline-immersive">02 <span>Immersive tech</span></a>
+              <a href="#discipline-making"
+                >03 <span>Digital fabrication</span></a
+              >
+              <a href="#discipline-leadership"
+                >04 <span>Leadership &amp; learning</span></a
+              >
+            </div>
+          </div>
+          <div class="discipline-stack">
+            <article class="discipline" id="discipline-web" data-discipline="0">
+              <div class="discipline-top mono">
+                <span>01 / Digital &amp; AI</span
+                ><span>From idea to interaction</span>
+              </div>
+              <div class="discipline-visual code-visual" aria-hidden="true">
+                <div class="code-window">
+                  <span>human.input</span>
+                  <div class="code-connection"></div>
+                  <strong>what if<span class="code-cursor">_</span></strong>
+                  <div class="code-connection"></div>
+                  <span>meaningful.output</span>
                 </div>
-                <span class="terminal-label mono">contact_protocol.sh</span>
+                <div class="visual-coordinate mono">
+                  INPUT / IMAGINATION<br />OUTPUT / POSSIBILITY
+                </div>
               </div>
-
-              <ul class="command-list mono">
-                <li>Ping successful. Francesco_Laterza node reachable.</li>
-                <li>Preferred topics: innovation strategy, immersive education, digital experiences.</li>
-                <li>Fastest route: email or LinkedIn direct message.</li>
+              <h3>Less friction.<br />More possibility.</h3>
+              <p>
+                Digital products with personality. AI workflows that solve real
+                problems. From the first prototype to the systems that make it
+                scale.
+              </p>
+              <ul class="tags">
+                <li>Web development</li>
+                <li>GenAI</li>
+                <li>Automation</li>
               </ul>
-
-              <div class="contact-links">
-                <a class="contact-link" href="mailto:francescolaterza@gmail.com">
-                  <small>Email</small>
-                  <strong>francescolaterza@gmail.com</strong>
-                </a>
-
-                <a class="contact-link" href="https://www.linkedin.com/in/flat3/" target="_blank" rel="noreferrer">
-                  <small>LinkedIn</small>
-                  <strong>linkedin.com/in/flat3</strong>
-                </a>
-                <div class="contact-link">
-                  <small>Location</small>
-                  <strong>Rome, Italy</strong>
+            </article>
+            <article
+              class="discipline"
+              id="discipline-immersive"
+              data-discipline="1"
+            >
+              <div class="discipline-top mono">
+                <span>02 / Immersive tech</span><span>Beyond the screen</span>
+              </div>
+              <div class="discipline-visual portal-visual" aria-hidden="true">
+                <div class="portal">
+                  <i></i><i></i><i></i><i></i><i></i><i></i>
+                </div>
+                <div class="visual-coordinate mono">
+                  DIMENSIONS / EXPANDED<br />PRESENCE / ACTIVATED
                 </div>
               </div>
-
-              <div class="contact-actions">
-                <a class="button button--primary magnetic" href="mailto:francescolaterza@gmail.com">
-                  <i class="ri-mail-send-line" aria-hidden="true"></i>
-                  Send email
-                </a>
-                <a class="button button--secondary magnetic" href="https://www.linkedin.com/in/flat3/" target="_blank" rel="noreferrer">
-                  <i class="ri-linkedin-line" aria-hidden="true"></i>
-                  LinkedIn
-                </a>
-                <button class="button button--ghost magnetic" type="button" data-copy="francescolaterza@gmail.com">
-                  <i class="ri-file-copy-line" aria-hidden="true"></i>
-                  Copy email
-                </button>
-              </div>
+              <h3>Don't just see it.<br />Step inside it.</h3>
+              <p>
+                VR and AR experiences that turn passive watching into active
+                discovery. Because the lessons you live are the ones you
+                remember.
+              </p>
+              <ul class="tags">
+                <li>VR / AR</li>
+                <li>Experience design</li>
+                <li>Immersive learning</li>
+              </ul>
             </article>
+            <article
+              class="discipline"
+              id="discipline-making"
+              data-discipline="2"
+            >
+              <div class="discipline-top mono">
+                <span>03 / Digital fabrication</span
+                ><span>Make it tangible</span>
+              </div>
+              <div class="discipline-visual making-visual" aria-hidden="true">
+                <div class="layer-object">
+                  <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i
+                  ><i></i>
+                </div>
+                <div class="visual-coordinate mono">
+                  MATERIAL / IDEAS<br />STATUS / TAKING SHAPE
+                </div>
+              </div>
+              <h3>Ideas are good.<br />Making is better.</h3>
+              <p>
+                From a CAD model to an object you can hold. I bring digital
+                fabrication into labs, classrooms and communities that learn by
+                doing.
+              </p>
+              <ul class="tags">
+                <li>3D printing &amp; scanning</li>
+                <li>CAD</li>
+                <li>Fab labs</li>
+              </ul>
+            </article>
+            <article
+              class="discipline"
+              id="discipline-leadership"
+              data-discipline="3"
+            >
+              <div class="discipline-top mono">
+                <span>04 / Leadership &amp; learning</span
+                ><span>Bring people along</span>
+              </div>
+              <div class="discipline-visual network-visual" aria-hidden="true">
+                <svg viewBox="0 0 500 240">
+                  <g fill="none" stroke="currentColor">
+                    <path
+                      d="M250 120 80 65m170 55L125 190m125-70L370 45m-120 75 180 65M80 65l45 125m245-145 60 140"
+                    />
+                    <circle cx="250" cy="120" r="40" />
+                    <circle cx="250" cy="120" r="55" opacity=".3" />
+                    <circle cx="80" cy="65" r="16" />
+                    <circle cx="125" cy="190" r="22" />
+                    <circle cx="370" cy="45" r="20" />
+                    <circle cx="430" cy="185" r="13" />
+                  </g>
+                </svg>
+                <div class="visual-coordinate mono">
+                  SYSTEM / HUMAN<br />POTENTIAL / MULTIPLIED
+                </div>
+              </div>
+              <h3>The best technology<br />empowers people.</h3>
+              <p>
+                CTO perspective, hands-on execution. I help teams navigate
+                complex challenges and make emerging technology accessible
+                through STEM and GenAI education.
+              </p>
+              <ul class="tags">
+                <li>Technology strategy</li>
+                <li>STEM education</li>
+                <li>Workshops</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section
+        class="playground section-pad"
+        id="playground"
+        aria-labelledby="play-title"
+      >
+        <div class="section-top">
+          <p class="eyebrow">03 / A small detour</p>
+          <span class="mono">Experiment 002</span>
+        </div>
+        <div class="play-heading">
+          <h2 id="play-title">Please, <em>touch</em><br />the artwork.</h2>
+          <div>
+            <p>
+              Curiosity isn't a spectator sport.<br />Move, drag, or tap. See
+              what happens.
+            </p>
+            <button class="text-link" type="button" id="grid-reset">
+              Reset the experiment
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M5 8a8 8 0 1 1-1 8M5 3v5h5" />
+              </svg>
+            </button>
+          </div>
+        </div>
+        <div class="grid-lab" id="grid-lab">
+          <canvas
+            id="elastic-grid"
+            tabindex="0"
+            aria-label="Elastic grid experiment. Drag or tap to deform the lines. Press Space to send a ripple."
+          ></canvas>
+          <div class="lab-top mono">
+            <span>Elastic thinking</span
+            ><span id="grid-state">System: curious</span>
+          </div>
+          <div class="lab-bottom">
+            <span class="mono">No right answer. Just play.</span
+            ><button type="button" id="surprise-button">Do not press</button>
+          </div>
+        </div>
+        <div class="play-note">
+          <span class="mono">Built from code. Powered by you.</span
+          ><button class="secret-count mono" type="button" data-console-open>
+            Hidden discoveries <span data-secret-count>0 / 3</span>
+          </button>
+        </div>
+      </section>
+
+      <section
+        class="experience section-pad"
+        id="experience"
+        aria-labelledby="experience-title"
+      >
+        <div class="section-top">
+          <p class="eyebrow">04 / Where curiosity has taken me</p>
+          <span class="mono">Selected experience</span>
+        </div>
+        <div class="experience-intro">
+          <h2 id="experience-title">
+            Different contexts.<br />Same restless energy.
+          </h2>
+          <p>
+            Across institutions, innovation labs and educational networks.
+            Connecting strategy to things that actually happen.
+          </p>
+        </div>
+        <div class="experience-list">
+          <details class="experience-row">
+            <summary>
+              <span class="mono period">2019 - present</span
+              ><span class="org"
+                >EIIS<span
+                  >European Institute for Innovation and Sustainability</span
+                ></span
+              ><span class="job">Chief Technology Officer</span
+              ><span class="expand-icon" aria-hidden="true"></span>
+            </summary>
+            <div class="experience-detail">
+              <p>
+                Technology infrastructure, product innovation and digital
+                systems. Connecting growth automation with future-focused STEM,
+                VR and AR learning experiences.
+              </p>
+              <span class="mono">Technology / Product / Education</span>
+            </div>
+          </details>
+          <details class="experience-row">
+            <summary>
+              <span class="mono period">2014 - 2022</span
+              ><span class="org">ENGILAB<span>Engicon srl</span></span
+              ><span class="job">Founder, CEO &amp; Fab Lab Manager</span
+              ><span class="expand-icon" aria-hidden="true"></span>
+            </summary>
+            <div class="experience-detail">
+              <p>
+                A hands-on environment for local innovation. 3D printing,
+                scanning and digital fabrication brought into education,
+                consulting and practical technology adoption.
+              </p>
+              <span class="mono">Making / Entrepreneurship / Community</span>
+            </div>
+          </details>
+          <details class="experience-row">
+            <summary>
+              <span class="mono period">2016 - 2019</span
+              ><span class="org"
+                >Italia Camp<span>Luiss Hub for Makers and Students</span></span
+              ><span class="job">Freelance Trainer</span
+              ><span class="expand-icon" aria-hidden="true"></span>
+            </summary>
+            <div class="experience-detail">
+              <p>
+                STEM modules, coding and game design workshops. Making digital
+                fabrication approachable through real experimentation and
+                hands-on learning.
+              </p>
+              <span class="mono">STEM / Coding / Digital fabrication</span>
+            </div>
+          </details>
+          <details class="experience-row">
+            <summary>
+              <span class="mono period">2016 - 2019</span
+              ><span class="org"
+                >Impactscool<span
+                  >Innovation and future skills network</span
+                ></span
+              ><span class="job">Ambassador &amp; Future Activist</span
+              ><span class="expand-icon" aria-hidden="true"></span>
+            </summary>
+            <div class="experience-detail">
+              <p>
+                Introducing emerging technologies to new audiences. Training and
+                conversations around exponential innovation, STEM and the skills
+                to shape what comes next.
+              </p>
+              <span class="mono"
+                >Future skills / Speaking / Technology literacy</span
+              >
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <section
+        class="contact section-pad"
+        id="contact"
+        aria-labelledby="contact-title"
+      >
+        <div class="section-top">
+          <p class="eyebrow">05 / Your next interesting conversation</p>
+          <span class="mono">Rome, Italy <span id="rome-time"></span></span>
+        </div>
+        <div class="contact-main">
+          <h2 id="contact-title">Have a good<br /><span>what if?</span></h2>
+          <a
+            class="contact-orbit"
+            href="mailto:francescolaterza@gmail.com"
+            aria-label="Email Francesco"
+            ><svg viewBox="0 0 80 80" aria-hidden="true">
+              <path d="M17 63 63 17M17 17h46v46" /></svg
+          ></a>
+        </div>
+        <div class="contact-bottom">
+          <p>
+            A product to build. A team to empower.<br />A wild idea that
+            deserves a first prototype.<br /><strong
+              >Let's see where it goes.</strong
+            >
+          </p>
+          <div class="contact-links">
+            <a href="mailto:francescolaterza@gmail.com"
+              >francescolaterza@gmail.com</a
+            ><a
+              href="https://www.linkedin.com/in/flat3/"
+              target="_blank"
+              rel="noopener noreferrer"
+              >LinkedIn
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M5 19 19 5M5 5h14v14" /></svg></a
+            ><a href="tel:+393280558866">+39 328 055 886</a>
           </div>
         </div>
       </section>
     </main>
 
     <footer class="footer">
-      <div class="footer__shell">
-        <article class="glass-panel terminal-panel">
-          <div class="terminal-bar">
-            <div class="terminal-dots" aria-hidden="true">
-              <span></span><span></span><span></span>
-            </div>
-            <span class="terminal-label mono">system / EOF</span>
-          </div>
-          <div class="terminal-screen mono">
-            <p><span class="prompt">&gt; get_credits()</span></p>
-            <p class="dim">© <span id="year">2026</span> Francesco Laterza — All rights reserved.</p>
-            <p class="dim">No AI was harmed. Powered by caffeine, curiosity &amp; cutting-edge tech.</p>
-            <p><span class="prompt">&gt; privacy_notice()</span></p>
-            <p class="dim">This site uses a first-party, cookie-free visit counter for aggregated audience measurement only.</p>
-            <p class="dim">No ad IDs, no profiling, no personal tracking. Summary stats are stored in Google Sheets.</p>
-            <p><span class="prompt">&gt;</span> <span class="footer__cursor" aria-hidden="true"></span></p>
-          </div>
-        </article>
+      <div class="footer-top">
+        <a class="wordmark" href="#home">francesco<span>laterza.</span></a>
+        <p>
+          No AI was harmed in the making of this website.<br />Powered by
+          <button class="coffee-link" type="button" id="coffee-button">
+            caffeine</button
+          >, curiosity &amp; cutting-edge tech.
+        </p>
+        <a href="#home" class="text-link"
+          >Back to top
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 20V4m-6 6 6-6 6 6" /></svg
+        ></a>
+      </div>
+      <div class="footer-bottom mono">
+        <span>&copy; <span id="year">2026</span> Francesco Laterza</span>
+        <div>
+          <button type="button" id="motion-toggle" aria-pressed="false">
+            Motion: on</button
+          ><button type="button" data-console-open>Curiosity console</button
+          ><button type="button" id="privacy-open">Privacy</button>
+        </div>
+        <span>Made of many things.</span>
       </div>
     </footer>
 
-    <div class="toast mono" role="status" aria-live="polite">Email copied to clipboard.</div>
-
-    <script>
-      window.addEventListener("load", function () {
-        const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-        const isCoarsePointer = window.matchMedia("(pointer: coarse)").matches;
-        const root = document.documentElement;
-        const pointerGlow = document.querySelector(".pointer-glow");
-        const navToggle = document.querySelector(".nav-toggle");
-        const nav = document.getElementById("site-nav");
-        const navLinks = Array.from(document.querySelectorAll(".site-nav a"));
-        const sections = navLinks
-          .map(function (link) {
-            return document.querySelector(link.getAttribute("href"));
-          })
-          .filter(Boolean);
-
-        if (isCoarsePointer) {
-          document.body.dataset.touch = "true";
-        }
-
-        const yearNode = document.getElementById("year");
-        if (yearNode) {
-          yearNode.textContent = new Date().getFullYear();
-        }
-
-        if (navToggle && nav) {
-          const navIcon = navToggle.querySelector("i");
-
-          navToggle.addEventListener("click", function () {
-            const isOpen = nav.classList.toggle("is-open");
-            navToggle.setAttribute("aria-expanded", String(isOpen));
-            if (navIcon) {
-              navIcon.className = isOpen ? "ri-close-line" : "ri-menu-line";
-            }
-          });
-
-          navLinks.forEach(function (link) {
-            link.addEventListener("click", function () {
-              nav.classList.remove("is-open");
-              navToggle.setAttribute("aria-expanded", "false");
-              if (navIcon) {
-                navIcon.className = "ri-menu-line";
-              }
-            });
-          });
-        }
-
-        function updateProgress() {
-          const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-          const value = maxScroll > 0 ? (window.scrollY / maxScroll) * 100 : 0;
-          root.style.setProperty("--scroll", Math.min(100, Math.max(0, value)) + "%");
-        }
-
-        function updateActiveSection() {
-          const threshold = window.scrollY + window.innerHeight * 0.35;
-          let activeId = sections.length ? sections[0].id : "";
-
-          sections.forEach(function (section) {
-            if (section.offsetTop <= threshold) {
-              activeId = section.id;
-            }
-          });
-
-          navLinks.forEach(function (link) {
-            link.classList.toggle("is-active", link.getAttribute("href") === "#" + activeId);
-          });
-        }
-
-        let scrollRaf = null;
-        function onScroll() {
-          if (scrollRaf) {
-            return;
-          }
-
-          scrollRaf = requestAnimationFrame(function () {
-            updateProgress();
-            updateActiveSection();
-            scrollRaf = null;
-          });
-        }
-
-        updateProgress();
-        updateActiveSection();
-        window.addEventListener("scroll", onScroll, { passive: true });
-        window.addEventListener("resize", function () {
-          updateProgress();
-          updateActiveSection();
-        });
-
-        if (pointerGlow && !isCoarsePointer) {
-          window.addEventListener("pointermove", function (event) {
-            pointerGlow.style.left = event.clientX + "px";
-            pointerGlow.style.top = event.clientY + "px";
-            pointerGlow.style.opacity = "0.38";
-          });
-
-          document.addEventListener("pointerleave", function () {
-            pointerGlow.style.opacity = "0";
-          });
-        }
-
-        if (!prefersReducedMotion && window.matchMedia("(pointer: fine)").matches) {
-          document.querySelectorAll(".magnetic").forEach(function (element) {
-            element.addEventListener("mousemove", function (event) {
-              const bounds = element.getBoundingClientRect();
-              const x = event.clientX - bounds.left - bounds.width / 2;
-              const y = event.clientY - bounds.top - bounds.height / 2;
-              element.style.transform = "translate(" + x * 0.14 + "px, " + y * 0.14 + "px)";
-            });
-
-            element.addEventListener("mouseleave", function () {
-              element.style.transform = "";
-            });
-          });
-
-          document.querySelectorAll("[data-tilt]").forEach(function (card) {
-            card.addEventListener("mousemove", function (event) {
-              const bounds = card.getBoundingClientRect();
-              const x = (event.clientX - bounds.left) / bounds.width - 0.5;
-              const y = (event.clientY - bounds.top) / bounds.height - 0.5;
-              card.style.transform =
-                "perspective(1000px) rotateX(" +
-                y * -6 +
-                "deg) rotateY(" +
-                x * 8 +
-                "deg) translateY(-4px)";
-            });
-
-            card.addEventListener("mouseleave", function () {
-              card.style.transform = "";
-            });
-          });
-        }
-
-        document.querySelectorAll("[data-counter]").forEach(function (counter) {
-          const target = Number(counter.dataset.counter || 0);
-          const suffix = counter.dataset.suffix || "";
-          const observer = new IntersectionObserver(
-            function (entries) {
-              entries.forEach(function (entry) {
-                if (!entry.isIntersecting) {
-                  return;
-                }
-
-                observer.disconnect();
-
-                const duration = 1400;
-                let startTime = null;
-
-                function tick(timestamp) {
-                  if (!startTime) {
-                    startTime = timestamp;
-                  }
-
-                  const progress = Math.min(1, (timestamp - startTime) / duration);
-                  const eased = 1 - Math.pow(1 - progress, 3);
-                  counter.textContent = Math.round(target * eased) + suffix;
-
-                  if (progress < 1) {
-                    requestAnimationFrame(tick);
-                  }
-                }
-
-                requestAnimationFrame(tick);
-              });
-            },
-            { threshold: 0.6 }
-          );
-
-          observer.observe(counter);
-        });
-
-        const copyButton = document.querySelector("[data-copy]");
-        const toast = document.querySelector(".toast");
-
-        if (copyButton) {
-          copyButton.addEventListener("click", async function () {
-            const value = copyButton.getAttribute("data-copy");
-
-            try {
-              await navigator.clipboard.writeText(value);
-              if (toast) {
-                toast.classList.add("is-visible");
-                window.setTimeout(function () {
-                  toast.classList.remove("is-visible");
-                }, 1800);
-              }
-            } catch (error) {
-              window.location.href = "mailto:" + value;
-            }
-          });
-        }
-
-        if (window.gsap && window.ScrollTrigger && !prefersReducedMotion) {
-          window.gsap.registerPlugin(window.ScrollTrigger);
-
-          document.querySelectorAll("[data-reveal]").forEach(function (element) {
-            const reveal = element.getAttribute("data-reveal");
-            const fromState =
-              reveal === "left"
-                ? { opacity: 0, x: -56 }
-                : reveal === "right"
-                  ? { opacity: 0, x: 56 }
-                  : reveal === "zoom"
-                    ? { opacity: 0, y: 24, scale: 0.92 }
-                    : { opacity: 0, y: 42 };
-
-            window.gsap.fromTo(
-              element,
-              fromState,
-              {
-                opacity: 1,
-                x: 0,
-                y: 0,
-                scale: 1,
-                duration: 1.05,
-                ease: "power3.out",
-                scrollTrigger: {
-                  trigger: element,
-                  start: "top 85%",
-                  once: true
-                }
-              }
-            );
-          });
-
-          window.gsap.utils.toArray(".timeline-card").forEach(function (card, index) {
-            window.gsap.from(card, {
-              opacity: 0,
-              x: index % 2 === 0 ? -60 : 60,
-              y: 30,
-              duration: 1,
-              ease: "power3.out",
-              scrollTrigger: {
-                trigger: card,
-                start: "top 86%",
-                once: true
-              }
-            });
-          });
-
-        }
-      });
-    </script>
-
-    <script>
-    /* ============================================================
-       CHAT SYSTEM
-       ============================================================ */
-    (function () {
-      const CHAT_PROXY_URL = 'https://script.google.com/macros/s/AKfycbxYWL2I_qAjHc8vxJh0zHV0qgsM5mUnswNwTtUh7Ns-UgXh_-ZPF2JG7Ixly63SoTDf/exec';
-      const mobileChatQuery = window.matchMedia("(max-width: 900px), (pointer: coarse)");
-
-      const SECTIONS = {
-        home: {
-          context: 'The visitor is on the hero/intro section. Francesco is introduced as a Creative Technologist and CTO based in Rome.',
-          questions: ['Who is Francesco Laterza?', 'What does a Creative Technologist do?', 'How can I collaborate with him?']
-        },
-        about: {
-          context: 'The visitor is viewing the about section, covering Francesco\'s multidisciplinary background: tech leadership, immersive tech, digital fabrication, and education.',
-          questions: ['What is his background?', 'What makes his approach distinctive?', 'Which technologies does he specialize in?']
-        },
-        skills: {
-          context: 'The visitor is viewing the skills/showcase section: web development, GenAI, VR/AR immersive experiences, and digital fabrication.',
-          questions: ['What is his main technical stack?', 'How does he work with GenAI?', 'What does immersive tech mean in his work?']
-        },
-        experience: {
-          context: 'The visitor is viewing the experience/timeline section with Francesco\'s career milestones and projects.',
-          questions: ['What has he mainly worked on?', 'What is his most significant project?', 'What kinds of organizations has he collaborated with?']
-        },
-        contact: {
-          context: 'The visitor is on the contact section, looking for ways to reach Francesco or start a collaboration.',
-          questions: ['How can I contact Francesco?', 'What kinds of projects is he open to?', 'What is the best way to collaborate?']
-        }
-      };
-
-      const LOADER_LINES = [
-        "Checking Francesco's signal...",
-        "Scanning projects and expertise...",
-        "Drafting a sharp reply..."
-      ];
-
-      let activeSection = 'home';
-      let chatOpen = false;
-      let chatSessionId = null;
-      let chatTrigger = null;
-      let conversationHistory = [];
-      let proxyWarmupPromise = null;
-      let isSending = false;
-      let hasTrackedPageView = false;
-
-      /* ── Section observer ── */
-      const observer = new IntersectionObserver(entries => {
-        let best = null, bestRatio = 0;
-        entries.forEach(e => { if (e.intersectionRatio > bestRatio) { bestRatio = e.intersectionRatio; best = e.target.id; } });
-        if (best && best !== activeSection) {
-          activeSection = best;
-          chatSessionId = null;
-          conversationHistory = [];
-        }
-      }, { threshold: [0.2, 0.5, 0.8] });
-
-      document.querySelectorAll('section[id]').forEach(s => observer.observe(s));
-
-      /* ── Chat open/close ── */
-      function openChat() {
-        if (chatOpen) return;
-        chatOpen = true;
-        updateChatTrigger();
-        warmChatProxy();
-        buildChatUI();
-      }
-
-      function closeChat() {
-        chatOpen = false;
-        const panel = document.getElementById('particle-chat');
-        if (panel) { panel.classList.remove('pc-open'); setTimeout(() => panel.remove(), 300); }
-        chatSessionId = null;
-        conversationHistory = [];
-        updateChatTrigger();
-      }
-
-      function ensureChatTrigger() {
-        if (chatTrigger) return chatTrigger;
-        chatTrigger = document.createElement('button');
-        chatTrigger.type = 'button';
-        chatTrigger.className = 'pc-chat-trigger';
-        chatTrigger.setAttribute('aria-label', 'Open AI Terminal');
-        chatTrigger.innerHTML = '<i class="ri-chat-1-line" aria-hidden="true"></i><span>AI Terminal</span>';
-        chatTrigger.addEventListener('click', openChat);
-        document.body.appendChild(chatTrigger);
-        return chatTrigger;
-      }
-
-      function updateChatTrigger() {
-        const trigger = ensureChatTrigger();
-        trigger.classList.toggle('is-hidden', chatOpen);
-      }
-
-      function syncChatMode() {
-        document.body.classList.toggle('is-mobile-chat', mobileChatQuery.matches);
-      }
-
-      function createChatId(prefix = 'pc') {
-        if (window.crypto?.randomUUID) return crypto.randomUUID();
-        return `${prefix}-${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
-      }
-
-      function getChatSessionId() {
-        if (!chatSessionId) chatSessionId = createChatId('pc-session');
-        return chatSessionId;
-      }
-
-      function detectUserLanguage(text) {
-        return /[àèéìòù]|\b(ciao|come|grazie|progetto|contatto|lavoro)\b/i.test(text) ? 'it' : 'en';
-      }
-
-      function delay(ms) {
-        return new Promise(resolve => setTimeout(resolve, ms));
-      }
-
-      function shouldTrackPageView() {
-        const protocol = window.location.protocol;
-        const hostname = String(window.location.hostname || '').toLowerCase();
-
-        if (protocol !== 'https:' && protocol !== 'http:') {
-          return false;
-        }
-
-        if (
-          hostname === 'localhost' ||
-          hostname === '127.0.0.1' ||
-          hostname === '0.0.0.0' ||
-          hostname.endsWith('.local')
-        ) {
-          return false;
-        }
-
-        return true;
-      }
-
-      function getAnalyticsLanguage() {
-        const language = String(document.documentElement.lang || navigator.language || 'en')
-          .trim()
-          .toLowerCase();
-
-        if (language.startsWith('it')) return 'it';
-        if (language.startsWith('en')) return 'en';
-        return 'other';
-      }
-
-      function getDeviceType() {
-        return window.matchMedia("(max-width: 900px), (pointer: coarse)").matches ? 'mobile' : 'desktop';
-      }
-
-      function getReferrerBucket() {
-        const referrer = document.referrer;
-
-        if (!referrer) {
-          return 'direct';
-        }
-
-        try {
-          const refUrl = new URL(referrer);
-          const refHost = String(refUrl.hostname || '').toLowerCase();
-          const currentHost = String(window.location.hostname || '').toLowerCase();
-
-          if (!refHost || refHost === currentHost) {
-            return 'direct';
-          }
-
-          if (
-            ['google.', 'bing.', 'duckduckgo.', 'search.yahoo.', 'ecosia.'].some(token => refHost.includes(token))
-          ) {
-            return 'search';
-          }
-
-          if (
-            ['linkedin.', 'instagram.', 'facebook.', 'x.com', 'twitter.', 't.co'].some(token => refHost.includes(token))
-          ) {
-            return 'social';
-          }
-        } catch (error) {
-          return 'other';
-        }
-
-        return 'other';
-      }
-
-      function trackPageView() {
-        if (hasTrackedPageView || !shouldTrackPageView()) {
-          return;
-        }
-
-        hasTrackedPageView = true;
-
-        const payload = {
-          type: 'pageview',
-          host: window.location.host,
-          path: window.location.pathname || '/',
-          language: getAnalyticsLanguage(),
-          deviceType: getDeviceType(),
-          referrerBucket: getReferrerBucket()
-        };
-
-        const body = JSON.stringify(payload);
-
-        if (navigator.sendBeacon) {
-          const blob = new Blob([body], { type: 'text/plain;charset=UTF-8' });
-          if (navigator.sendBeacon(CHAT_PROXY_URL, blob)) {
-            return;
-          }
-        }
-
-        fetch(CHAT_PROXY_URL, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'text/plain;charset=utf-8'
-          },
-          body: body,
-          cache: 'no-store',
-          keepalive: true
-        }).catch(() => {});
-      }
-
-      function isRetryableChatError(error) {
-        const message = String(error && error.message ? error.message : error).toLowerCase();
-        return (
-          message.includes('high demand') ||
-          message.includes('temporar') ||
-          message.includes('try again later') ||
-          message.includes('failed to fetch') ||
-          message.includes('networkerror') ||
-          message.includes('load failed') ||
-          message.includes('aborted') ||
-          message.includes('timeout')
-        );
-      }
-
-      function getFriendlyChatError(error) {
-        const message = String(error && error.message ? error.message : error).toLowerCase();
-
-        if (
-          message.includes('high demand') ||
-          message.includes('temporar') ||
-          message.includes('try again later')
-        ) {
-          return 'The assistant is temporarily busy. Please try again in a few seconds.';
-        }
-
-        if (
-          message.includes('failed to fetch') ||
-          message.includes('networkerror') ||
-          message.includes('load failed') ||
-          message.includes('aborted') ||
-          message.includes('timeout')
-        ) {
-          return 'The chat service is waking up. Please try again in a few seconds.';
-        }
-
-        return 'The assistant could not reply right now. Please try again in a moment.';
-      }
-
-      async function warmChatProxy() {
-        if (proxyWarmupPromise) return proxyWarmupPromise;
-
-        proxyWarmupPromise = fetch(CHAT_PROXY_URL, {
-          method: 'GET',
-          cache: 'no-store'
-        })
-          .then(response => response.json().catch(() => null))
-          .catch(() => {
-            proxyWarmupPromise = null;
-            return null;
-          });
-
-        return proxyWarmupPromise;
-      }
-
-      function setChatBusy(busy) {
-        const panel = document.getElementById('particle-chat');
-        if (!panel) return;
-
-        panel.querySelectorAll('.pc-suggestion').forEach(button => {
-          button.disabled = busy;
-          button.style.opacity = busy ? '0.55' : '';
-          button.style.pointerEvents = busy ? 'none' : '';
-        });
-
-        const input = panel.querySelector('.pc-input');
-        const send = panel.querySelector('.pc-send');
-
-        if (input) input.disabled = busy;
-        if (send) {
-          send.disabled = busy;
-          send.style.opacity = busy ? '0.55' : '';
-        }
-      }
-
-      async function requestChatReply(payload) {
-        let lastError = null;
-
-        for (let attempt = 0; attempt < 3; attempt += 1) {
-          const controller = new AbortController();
-          const timeout = window.setTimeout(() => controller.abort(), 18000);
-
-          try {
-            const res = await fetch(CHAT_PROXY_URL, {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'text/plain;charset=utf-8'
-              },
-              cache: 'no-store',
-              signal: controller.signal,
-              body: JSON.stringify(payload)
-            });
-            const data = await res.json();
-
-            if (!res.ok || !data.ok) {
-              throw new Error(data && data.error ? data.error : 'Chat proxy error');
-            }
-
-            return data.reply || 'Sorry, I can\'t respond right now.';
-          } catch (error) {
-            lastError = error;
-
-            if (attempt < 2 && isRetryableChatError(error)) {
-              await delay(900 * (attempt + 1));
-              continue;
-            }
-
-            throw error;
-          } finally {
-            window.clearTimeout(timeout);
-          }
-        }
-
-        throw lastError || new Error('Chat proxy error');
-      }
-
-      /* ── Chat UI ── */
-      function buildChatUI() {
-        const existing = document.getElementById('particle-chat');
-        if (existing) existing.remove();
-        const sec = SECTIONS[activeSection] || SECTIONS.home;
-        const panel = document.createElement('div');
-        panel.id = 'particle-chat';
-        panel.innerHTML = `
-          <div class="pc-bar">
-            <div class="pc-dots"><span></span><span></span><span></span></div>
-            <span class="pc-label">AI Terminal</span>
-            <button class="pc-close" aria-label="Close">×</button>
-          </div>
-          <div class="pc-messages" id="pc-messages">
-            <div class="pc-suggestions">
-              ${sec.questions.map(q => `<button class="pc-suggestion">${q}</button>`).join('')}
-            </div>
-          </div>
-          <form class="pc-form" id="pc-form">
-            <input class="pc-input" type="text" placeholder="Write a message…" autocomplete="off" />
-            <button type="submit" class="pc-send"><i class="ri-send-plane-line"></i></button>
-          </form>`;
-        document.body.appendChild(panel);
-        requestAnimationFrame(() => panel.classList.add('pc-open'));
-
-        panel.querySelector('.pc-close').addEventListener('click', closeChat);
-        panel.querySelectorAll('.pc-suggestion').forEach(btn =>
-          btn.addEventListener('click', () => sendMessage(btn.textContent))
-        );
-        panel.querySelector('#pc-form').addEventListener('submit', e => {
-          e.preventDefault();
-          const inp = e.target.querySelector('.pc-input');
-          const txt = inp.value.trim();
-          if (txt) { inp.value = ''; sendMessage(txt); }
-        });
-      }
-
-      /* ── Gemini call ── */
-      async function sendMessage(text) {
-        if (isSending) return;
-
-        const msgEl = document.getElementById('pc-messages');
-        if (!msgEl) return;
-        msgEl.querySelector('.pc-suggestions')?.remove();
-        appendMsg(msgEl, text, 'user');
-        isSending = true;
-        setChatBusy(true);
-
-        const typing = document.createElement('div');
-        typing.className = 'pc-msg pc-msg--ai pc-typing';
-        typing.innerHTML = `
-          <div class="pc-loader-line">
-            <span class="pc-prompt">fra@laterza:~$</span>
-            <span class="pc-loader-text">${LOADER_LINES[0]}</span>
-          </div>
-          <div class="pc-loader-track" aria-hidden="true">
-            <span></span><span></span><span></span>
-          </div>
-        `;
-        msgEl.appendChild(typing);
-        msgEl.scrollTop = msgEl.scrollHeight;
-        const loaderText = typing.querySelector('.pc-loader-text');
-        let loaderIndex = 0;
-        const loaderTimer = window.setInterval(() => {
-          if (!loaderText) return;
-          loaderIndex = (loaderIndex + 1) % LOADER_LINES.length;
-          loaderText.textContent = LOADER_LINES[loaderIndex];
-        }, 1100);
-
-        const sec = SECTIONS[activeSection] || SECTIONS.home;
-        const userMessage = {
-          role: 'user',
-          parts: [{ text }]
-        };
-        const payload = {
-          message: text,
-          history: conversationHistory.slice(-20),
-          sessionId: getChatSessionId(),
-          turnId: createChatId('pc-turn'),
-          section: activeSection,
-          sectionContext: sec.context,
-          language: detectUserLanguage(text),
-          pageUrl: window.location.href,
-          userAgent: navigator.userAgent
-        };
-
-        try {
-          await warmChatProxy();
-          const reply = await requestChatReply(payload);
-          window.clearInterval(loaderTimer);
-          conversationHistory.push(
-            userMessage,
-            { role: 'model', parts: [{ text: reply }] }
-          );
-          typing.remove();
-          appendMsg(msgEl, reply, 'ai');
-        } catch (error) {
-          window.clearInterval(loaderTimer);
-          typing.remove();
-          appendMsg(msgEl, getFriendlyChatError(error), 'ai');
-        } finally {
-          isSending = false;
-          setChatBusy(false);
-        }
-        msgEl.scrollTop = msgEl.scrollHeight;
-      }
-
-      function appendMsg(container, text, role) {
-        const div = document.createElement('div');
-        div.className = `pc-msg pc-msg--${role}`;
-        if (role === 'ai') {
-          div.innerHTML = `<span class="pc-prompt">fra@laterza:~$</span> ${text.replace(/</g,'&lt;').replace(/>/g,'&gt;')}`;
-        } else {
-          div.textContent = text;
-        }
-        container.appendChild(div);
-      }
-
-      /* ── Init ── */
-      syncChatMode();
-      window.addEventListener('resize', syncChatMode);
-      ensureChatTrigger();
-      updateChatTrigger();
-      trackPageView();
-      warmChatProxy();
-    })();
-    </script>
+    <button
+      class="chat-trigger"
+      type="button"
+      id="chat-open"
+      aria-haspopup="dialog"
+      aria-controls="chat-dialog"
+    >
+      <span class="status-dot" aria-hidden="true"></span>AI Terminal
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M5 7 10 12 5 17m8 0h6" />
+      </svg>
+    </button>
+    <dialog class="chat-dialog" id="chat-dialog" aria-labelledby="chat-title">
+      <div class="dialog-header">
+        <div>
+          <span class="eyebrow">A digital introduction</span>
+          <h2 id="chat-title">AI Terminal</h2>
+        </div>
+        <button class="close-button mono" type="button" data-close>
+          Close
+        </button>
+      </div>
+      <div
+        class="chat-messages"
+        id="chat-messages"
+        role="log"
+        aria-label="Chat conversation"
+        aria-live="polite"
+      >
+        <p class="chat-welcome">
+          Hello, curious human.<br />What would you like to know about
+          Francesco?
+        </p>
+        <div class="chat-suggestions">
+          <button type="button" data-question>What does Francesco do?</button
+          ><button type="button" data-question>How does he work with AI?</button
+          ><button type="button" data-question>How can we collaborate?</button>
+        </div>
+      </div>
+      <p class="chat-notice">
+        AI can make mistakes. Messages are processed by Google Gemini and saved
+        for review. Please avoid sensitive information.
+      </p>
+      <form id="chat-form" class="chat-form">
+        <label class="sr-only" for="chat-input">Your message</label
+        ><input
+          id="chat-input"
+          name="message"
+          placeholder="Ask something interesting..."
+          autocomplete="off"
+          maxlength="2000"
+          required
+        /><button type="submit" class="send-button" aria-label="Send message">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="m4 4 17 8-17 8 3-8-3-8Zm3 8h14" />
+          </svg>
+        </button>
+      </form>
+    </dialog>
+    <dialog
+      class="console-dialog"
+      id="console-dialog"
+      aria-labelledby="console-title"
+    >
+      <div class="dialog-header">
+        <div>
+          <span class="eyebrow">For the delightfully curious</span>
+          <h2 id="console-title">Curiosity console</h2>
+        </div>
+        <button class="close-button mono" data-close type="button">
+          Close
+        </button>
+      </div>
+      <div
+        class="console-log mono"
+        id="console-log"
+        role="log"
+        aria-live="polite"
+      >
+        <p>OK / You found the back door.</p>
+        <p>This is a local playground. Try help to look around.</p>
+      </div>
+      <div class="console-shortcuts">
+        <button type="button" data-command="help">help</button
+        ><button type="button" data-command="whoami">whoami</button
+        ><button type="button" data-command="coffee">coffee</button
+        ><button type="button" data-command="blueprint">blueprint</button
+        ><button type="button" data-command="reset">reset</button>
+      </div>
+      <form id="console-form">
+        <label class="mono" for="console-input">guest@curiosity:~$</label
+        ><input
+          id="console-input"
+          autocomplete="off"
+          autocapitalize="off"
+          spellcheck="false"
+          maxlength="100"
+          placeholder="Type a command"
+        /><button class="mono" type="submit">Run</button>
+      </form>
+    </dialog>
+    <dialog
+      class="privacy-dialog"
+      id="privacy-dialog"
+      aria-labelledby="privacy-title"
+    >
+      <div class="dialog-header">
+        <h2 id="privacy-title">Privacy</h2>
+        <button class="close-button mono" data-close type="button">
+          Close
+        </button>
+      </div>
+      <div class="privacy-copy">
+        <p>
+          This portfolio's visit counter stores daily totals and broad device,
+          language and traffic-source categories in a Google Sheet. It does not
+          store IP addresses or create visitor identifiers. Counts represent
+          pageviews, not unique people.
+        </p>
+        <p>
+          The AI Terminal sends your messages and recent conversation to Google
+          Apps Script and Gemini. The conversation is recorded in a private
+          Google Sheet. Avoid sharing sensitive information. Hosting and Google
+          services also process the technical data needed to serve requests.
+        </p>
+        <p>
+          Contact Francesco Laterza at
+          <a href="mailto:francescolaterza@gmail.com"
+            >francescolaterza@gmail.com</a
+          >
+          for questions about data or requests concerning your chat. Local
+          previews do not send visit counts.
+        </p>
+      </div>
+    </dialog>
+    <div class="toast mono" id="toast" role="status" aria-live="polite"></div>
   </body>
 </html>
