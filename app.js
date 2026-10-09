@@ -777,10 +777,16 @@
     );
   }
 
-  // Il contatore si attiva soltanto sul dominio pubblico esistente, senza identificatori del visitatore.
+  // Il contatore si attiva solo sugli host pubblici del portfolio, senza identificatori del visitatore.
   function trackVisit() {
+    const publicHosts = new Set([
+      "francescolaterza.it",
+      "www.francescolaterza.it",
+      "skikko.github.io",
+    ]);
+
     if (
-      location.hostname !== "skikko.github.io" ||
+      !publicHosts.has(location.hostname.toLowerCase()) ||
       document.visibilityState !== "visible" ||
       navigator.doNotTrack === "1" ||
       navigator.globalPrivacyControl === true
